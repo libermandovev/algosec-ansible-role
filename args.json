@@ -1,0 +1,13 @@
+{
+  "ANSIBLE_MODULE_ARGS": {
+    "server": "192.168.58.128",
+    "user": "admin",
+    "password": "algosec",
+    "app_name": "Payroll",
+    "name": "new-test-flow",
+    "sources": "192.168.12.12",
+    "destinations": "16.47.71.62",
+    "services": "http,https",
+    "state": "present"
+  }
+}
