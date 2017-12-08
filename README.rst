@@ -6,7 +6,9 @@ Algosec Ansible role provide a set of Ansible modules to help you manage and orc
 Requirements
 ------------
 
-All modules of this role are dependent upon the `algosec` python package which is distributed separately
+All modules of this role are dependent upon the `algosec` python package which is distributed separately::
+
+    pip install algosec
 
 Role Variables
 --------------

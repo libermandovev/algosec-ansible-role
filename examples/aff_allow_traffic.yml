@@ -4,7 +4,7 @@
   gather_facts: False
 
   roles:
-    - role: AlmogCohen.algosec
+    - role: algosec.algosec
 
   tasks:
   - name: Grab the credentials from ansible-vault
@@ -12,17 +12,17 @@
     no_log: 'yes'
 
   - name: Create the FireFlow ticket if traffic not allowed
-      aff_allow_traffic:
-        ip_address: "{{ ip_address }}"
-        user: "{{ username }}"
-        password: "{{ password }}"
+    aff_allow_traffic:
+      ip_address: "{{ ip_address }}"
+      user: "{{ username }}"
+      password: "{{ password }}"
 
-        # Specific connectivity check parameters
-        requestor: almogco
-        email: almog@algosec.com
-        sources: 192.168.1.1,192.168.1.2
-        destinations: 8.8.8.8,4.4.4.4
-        services: http,dns
-      register: result
+      # Specific connectivity check parameters
+      requestor: almogco
+      email: almog@algosec.com
+      sources: 192.168.1.1,192.168.1.2
+      destinations: 8.8.8.8,4.4.4.4
+      services: http,dns
+    register: result
 
     - debug: var=result

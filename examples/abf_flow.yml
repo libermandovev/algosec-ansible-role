@@ -4,7 +4,7 @@
   gather_facts: False
 
   roles:
-    - role: AlmogCohen.algosec
+    - role: algosec.algosec
 
   tasks:
   - name: Grab the credentials from ansible-vault
@@ -12,13 +12,13 @@
     no_log: 'yes'
 
   - name: Create the flow on ABF
-      abf_flow:
-        ip_address: "{{ ip_address }}"
-        user: "{{ username }}"
-        password: "{{ password }}"
+    abf_flow:
+      ip_address: "{{ ip_address }}"
+      user: "{{ username }}"
+      password: "{{ password }}"
 
-        app_name: Payroll
-        name: new-test-flow
-        sources: 192.168.12.12
-        destinations: 16.47.71.62
-        services: HTTPS,http
+      app_name: Payroll
+      name: new-test-flow
+      sources: 192.168.12.12
+      destinations: 16.47.71.62
+      services: HTTPS,http

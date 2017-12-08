@@ -134,7 +134,7 @@ def main():
         argument_spec=dict(
             # arguments used for creating the flow
             ip_address=dict(required=True),
-            user=dict(required=True, aliases=['username'], default="admin"),
+            user=dict(required=True, aliases=['username']),
             password=dict(aliases=['pass', 'pwd'], required=True, no_log=True),
             app_name=dict(required=True),
             name=dict(required=False),

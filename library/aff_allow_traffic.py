@@ -125,7 +125,7 @@ def main():
         supports_check_mode=True,
         argument_spec=dict(
             ip_address=dict(required=True),
-            user=dict(required=True, aliases=['username'], default="admin"),
+            user=dict(required=True, aliases=['username']),
             password=dict(aliases=['pass', 'pwd'], required=True, no_log=True),
             requester=dict(required=True),
             email=dict(required=True),
