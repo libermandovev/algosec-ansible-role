@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
 # TODO: Add copyright data here
+import traceback
+
 ANSIBLE_METADATA = {
     'metadata_version': '1.0',
     'status': ['preview'],
@@ -34,7 +36,7 @@ options:
         required: true
         description:
             - Password credentials to use for auth.
-    requestor:
+    requester:
         required: true
         description:
             - The first and last name of the requester.
@@ -55,8 +57,8 @@ options:
     services:
         required: true
         description:
-            - List of services of the traffic to allow. Accepted services are as defined on Algosec or by port/proto format
-               (e.g. tcp/50,udp/100,ssh).
+            - List of services of the traffic to allow. Accepted services are as defined on Algosec
+            - or by port/proto format (e.g. tcp/50,udp/100,ssh).
     transport:
         default: ipv4
         choices: [ ipv4, ipv6 ]
@@ -66,24 +68,26 @@ options:
 """
 
 EXAMPLES = """
-- hosts: localhost
-  connection: local
-  tasks:
-      - name: Create the FireFlow ticket if traffic not allowed
+   - name: Create Traffic Change Request if needed
+     hosts: algosec-server
+
+     - name: Create Traffic Change Request
+       # We use delegation to use the local python interpreter (and virtualenv if enabled)
+       delegate_to: localhost
        aff_allow_traffic:
-          ip_address: "{{ ip_address }}"
-          user: "{{ username }}"
-          password: "{{ password }}"
-          
-          # Specific connectivity check parameters
-          requestor: almogco
-          email: almog@algosec.com
-          sources: 192.168.1.1,192.168.1.2
-          destinations: 8.8.8.8,4.4.4.4
-          services: http,dns
+         ip_address: 192.168.58.128
+         user: admin
+         password: S0mePA$$w0rd
+
+         requester: almogco
+         email: almog@email.com
+         sources: 192.168.12.12,123.123.132.123
+         destinations: 16.47.71.62,234.234.234.234
+         services: HTTPS,http,tcp/80,tcp/51
        register: result
-- name: Display the url for the created change request ticket (if already registered)
-    - debug: var=result
+
+     - name: Print the test results
+       debug: var=result
 """
 
 RETURN = """
@@ -129,7 +133,6 @@ def main():
             password=dict(aliases=['pass', 'pwd'], required=True, no_log=True),
             requester=dict(required=True),
             email=dict(required=True),
-            # action=dict(default='allow', choices=['allow', 'drop']),
             sources=dict(type='list', required=True),
             destinations=dict(type='list', required=True),
             services=dict(type='list', required=True),
@@ -153,7 +156,7 @@ def main():
         )
     except AlgosecAPIError:
         exc = get_exception()
-        module.fail_json(msg="Error executing traffic simulation:\n{}".format(exc.message))
+        module.fail_json(msg="Error executing traffic simulation query:\n{}".format(traceback.format_exc()))
         return
 
     response = {'connectivity_status': connectivity_status.value.text}
@@ -167,7 +170,7 @@ def main():
         module.log(
             'Connectivity status is {}. Opening ticket on Algosec FireFlow at {}'.format(
                 connectivity_status,
-                module.params['algosec_host']
+                module.params['ip_address']
             )
         )
         if not module.check_mode:
@@ -194,8 +197,7 @@ def main():
                     description="Traffic change request created by {} directly from Ansible.".format(requester)
                 )
             except AlgosecAPIError:
-                exc = get_exception()
-                module.fail_json(msg="Error creating change request:\n{}".format(exc.message))
+                module.fail_json(msg="Error creating change request:\n{}".format(traceback.format_exc()))
                 return
             response['change_request_url'] = change_request_url
         response['changed'] = True

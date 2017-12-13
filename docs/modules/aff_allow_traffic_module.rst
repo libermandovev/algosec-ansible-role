@@ -15,15 +15,14 @@ aff_allow_traffic
 Synopsis
 --------
 
-* Apply an authcode to a device.
-* The authcode should have been previously registered on the Palo Alto Networks support portal.
-* The device should have Internet access.
+* Check and create traffic change requests with Algosec FireFlow.
+* Algosec Ansible module will help you manage and orchestrate your tasks to work with Algosec FireFlow service. When used, the `aff` command will check if a certain traffic is allowed between `source` and `dest`. If the connectivity is not allowed between the nodes, the module will create a "Change Request" on Algosec's FireFlow and will provide the change request url in the module call result.
 
 
 Requirements (on host that executes module)
 -------------------------------------------
 
-  * pan-python
+  * `algosec` can be obtained from PyPi https://pypi.python.org/pypi/algosec
 
 
 Options
@@ -152,24 +151,26 @@ Examples
 
  ::
 
-        - hosts: localhost
-          connection: local
-          tasks:
-              - name: Create the FireFlow ticket if traffic not allowed
-               aff_allow_traffic:
-                  ip_address: "{{ ip_address }}"
-                  user: "{{ username }}"
-                  password: "{{ password }}"
+   - name: Create Traffic Change Request if needed
+     hosts: algosec-server
 
-                  # Specific connectivity check parameters
-                  requestor: almogco
-                  email: almog@algosec.com
-                  sources: 192.168.1.1,192.168.1.2
-                  destinations: 8.8.8.8,4.4.4.4
-                  services: http,dns
-               register: result
-        - name: Display the url for the created change request ticket (if already registered)
-            - debug: var=result
+     - name: Create Traffic Change Request
+       # We use delegation to use the local python interpreter (and virtualenv if enabled)
+       delegate_to: localhost
+       aff_allow_traffic:
+         ip_address: 192.168.58.128
+         user: admin
+         password: S0mePA$$w0rd
+
+         requester: almogco
+         email: almog@email.com
+         sources: 192.168.12.12,123.123.132.123
+         destinations: 16.47.71.62,234.234.234.234
+         services: HTTPS,http,tcp/80,tcp/51
+       register: result
+
+     - name: Print the test results
+       debug: var=result
 
 Return Values
 -------------

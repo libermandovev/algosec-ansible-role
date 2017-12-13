@@ -4,7 +4,7 @@
   gather_facts: False
 
   roles:
-    - role: algosec.algosec
+    - role: ansible-role-algosec
 
   tasks:
   - name: Grab the credentials from ansible-vault

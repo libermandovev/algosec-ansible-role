@@ -1,0 +1,4 @@
+These var files are provided in cleartext. They should be edited and encrypred using:
+
+ansible-vault encrypt algosec-secrets.yml
+ansible-vault encrypt algosec-secrets.yml

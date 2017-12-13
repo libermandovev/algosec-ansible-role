@@ -55,9 +55,9 @@ Debug
 ::
 
     pip install ipdb
-    python -m ipdb ./library/abf_flow.py ./args.json
+    python -m ipdb ./library/abf_flow.py ./debug/abf_flow_args.json
     
-and the `args.json` file should look something like::
+and the `abf_flow_args.json` file should look something like::
 
     {
       "ANSIBLE_MODULE_ARGS": {
@@ -81,7 +81,7 @@ Documentation
     
 Using Docker::
 
-    $ docker run -it -v <PATH_TO_REPO>/ansible-role-algosec/:/documents/ ivanbojer/spinx-with-rtd
+    $ docker run -it -v $PWD:/ansible-role-algosec/:/documents/ ivanbojer/spinx-with-rtd
     $ cd docs
     $ make html
 

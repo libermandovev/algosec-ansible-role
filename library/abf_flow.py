@@ -2,120 +2,102 @@
 
 # TODO: Add copyright data here
 #
-# ANSIBLE_METADATA = {
-#     'metadata_version': '1.0',
-#     'status': ['preview'],
-#     'supported_by': 'community'
-# }
-#
-# DOCUMENTATION = """
-# ---
-# module: aff
-# short_description: Check and create traffic change requests with Algosec FireFlow.
-# description:
-#     - Algosec Ansible module will help you manage and orchestrate your tasks to work with Algosec FireFlow server.
-#     - When used, the `aff` command will check if a certain traffic is allowed between `source` and `dest`.
-#     - If the connectivity is not allowed between the nodes, the module will create a "Change Request"
-#     - on Algosec's FireFlow and will provide the change request url in the module call result.
-# version_added: null
-# author: "Almog Cohen (@AlmogCohen)"
-# options:
-#     algosec_host:
-#         required: true
-#         description:
-#             - Hostname of your accesible Algosec's server (e.g. 192.168.12.200, algosec.internal).
-#     user:
-#         required: true
-#         description:
-#             - The username that will be used to sign-in into Algosec's server and create the Traffic Change Request.
-#     password:
-#         required: true
-#         description:
-#             - The password that will be used to sign-in into Algosec's server and create the Traffic Change Request.
-#     requestor:
-#         required: true
-#         description:
-#             - The requester name to be assigned to the Traffic change request ticket.
-#     email:
-#         required: true
-#         description:
-#             - The requester email to be assigned to the Traffic change request ticket.
-#     source:
-#         required: true
-#         description:
-#             - The hostname/nickname of the object that the network traffic will be sent from.
-#             - For example: 192.168.1.5, PAYROLL_WEB_SERVER
-#     dest:
-#         required: true
-#         description:
-#             - The hostname/nickname of the network object that the network traffic will be sent to.
-#             - For example: 192.168.1.5, PAYROLL_WEB_SERVER
-#     service:
-#         required: true
-#         description:
-#             - The service we want to check connectivity for (e.g. tcp/5000, ssh, https, udp/333).
-#     # action:
-#     #     default: allow
-#     #     choices: [ allow, drop ]
-#     #     description:
-#     #         - Set the check for allowing network traffic or dropping network traffic.
-#     transport:
-#         default: ipv4
-#         choices: [ ipv4, ipv6 ]
-#         description:
-#             - Set the network connectivity check transport layer type.
-#
-# requirements:
-#     - requests==2.18.2
-#     - suds-jurko==0.6
-#     - suds_requests==0.3.1
-# """
-#
-# EXAMPLES = """
-# - hosts: localhost
-#   tasks:
-#     - name: Create FireFlow ticket if needed
-#       # The best practice is to run only once, since only one ticket is needed
-#       run_once: true
-#       # Delegating the command to localhost, where we have access to Algosec Servers
-#       delegate_to: localhost
-#       aff_allow_traffic:
-#         # Those parameters should be passed as args and loaded somewhere else, probably from the vault
-#         algosec_host: 192.168.58.128
-#         user: admin
-#         password: VeryStrongPassword1#
-#
-#         # Specific connectivity check parameters
-#         requestor: almogco
-#         email: almog@company.com
-#         source: 192.168.1.1
-#         dest: 8.8.8.8
-#         service: http
-# """
-#
-# RETURN = """
-# is_traffic_allowed:
-#     description: True if the service traffic is allowed from source to dest
-#     returned:
-#         - always
-#     type: bool
-#     sample: True, False
-# connectivity_status:
-#     description: The string representing the connectivity status
-#     returned:
-#         - always
-#     type: string
-#     sample: Partially, Allowed, Blocked
-# change_request_url:
-#     description: URL to the generated Change Request Ticket on Algosec's servers
-#     returned:
-#         - on traffic change creation
-#     type: string
-#     sample: https://192.168.58.128/FireFlow/Ticket/Display.html?id=2410
-# """
+ANSIBLE_METADATA = {
+    'metadata_version': '1.0',
+    'status': ['preview'],
+    'supported_by': 'community'
+}
 
+DOCUMENTATION = """
+---
+module: abf_flow
+short_description: Create new Application Flows on Algosec Business Flow.
+description:
+    - If the requested flow is a subset of one of the flows of the relevant Application, flow creation is cancelled.
+version_added: null
+author: "Almog Cohen (@AlmogCohen)"
+options:
+    ip_address:
+        required: true
+        description:
+            - IP address (or hostname) of the Algosec server.
+    user:
+        required: true
+        description:
+            - Username credentials to use for auth.
+    password:
+        required: true
+        description:
+            - Password credentials to use for auth.
+    app_name:
+        required: true
+        description:
+            - BusinessFlow Application to add the flow to.
+    name:
+        required: false
+        description:
+            - Name for the flow to be created
+    sources:
+        required: true
+        description:
+            - Comma separated IP list of traffic sources for the flow
+    destinations:
+        required: true
+        description:
+            - Comma separated IP list of traffic destinations for the flow
+    services:
+        required: true
+        description:
+            - Comma separated list of traffic services to allow in the flow. Services can be as defined on Algosec
+            - BusinessFlow or in a proto/port format (only UDP and TCP are supported as proto. e.g. tcp/50).
+    users:
+        default: []
+        description:
+            - Comma separated list of users the flow is relevant to.
+    network_applications:
+        default: []
+        description:
+            - Comma separated list of network application names the flow is relevant to.
+    comment:
+        default: Flow created by AlgosecAnsible
+        description:
+            - Comment to attach to the flow
+
+requirements:
+    - algosec~=0.2.0 (can be obtained from PyPi https://pypi.python.org/pypi/algosec)
+"""
+
+EXAMPLES = """
+   - name: Create a flow on an AlsogsecBusinessFlow App
+     hosts: algosec-server
+
+     tasks:
+     - name: Create the flow on ABF
+       # We use delegation to use the local python interpreter (and virtualenv if enabled)
+       delegate_to: localhost
+       abf_flow:
+         ip_address: 192.168.58.128
+         user: admin
+         password: S0mePA$$w0rd
+
+         app_name: Payroll
+         name: payroll-server-auth
+         sources: 192.168.12.12
+         destinations: 16.47.71.62,16.47.71.63
+         services: HTTPS,tcp/23
+"""
+
+RETURN = """
+changed:
+    description: 
+    returned:
+        - always
+    type: bool
+    sample: True, False
+"""
+
+import traceback
 from ansible.module_utils.basic import AnsibleModule
-from ansible.module_utils.basic import get_exception
 
 
 try:
@@ -176,13 +158,14 @@ def main():
             changed = False
         else:
             api.create_application_flow(app_id, requested_flow)
+            # to finalize the application flow creation, The application's draft version is applied
+            api.apply_application_draft(app_id)
             changed = True
 
         module.exit_json(changed=changed, msg="Done!")
 
     except AlgosecAPIError:
-        exc = get_exception()
-        module.fail_json(msg=exc.message)
+        module.fail_json(msg=(traceback.format_exc()))
 
 
 if __name__ == '__main__':

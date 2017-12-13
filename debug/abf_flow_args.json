@@ -1,0 +1,12 @@
+{
+  "ANSIBLE_MODULE_ARGS": {
+    "ip_address": "192.168.58.128",
+    "user": "admin",
+    "password": "algosec",
+    "app_name": "Payroll",
+    "name": "new-test-flow",
+    "sources": "192.168.12.12,123.123.132.123",
+    "destinations": "16.47.71.62,234.234.234.234",
+    "services": "HTTPS,http,tcp/80,tcp/51"
+  }
+}

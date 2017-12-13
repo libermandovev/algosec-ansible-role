@@ -172,19 +172,20 @@ Examples
 
  ::
 
-        - hosts: localhost
-          connection: local
-          tasks:
-            - name: Create the flow on ABF
-               abf_flow:
-               ip_address: 192.168.58.128
-               user: admin
-               password: S0mePA$$w0rd
+   - name: Create a flow on an AlsogsecBusinessFlow App
+     hosts: algosec-server
 
-               app_name: Payroll
-               name: new-test-flow
-               sources: 192.168.12.12
-               destinations: 16.47.71.62
-               services: HTTPS,http
+     tasks:
+     - name: Create the flow on ABF
+       # We use delegation to use the local python interpreter (and virtualenv if enabled)
+       delegate_to: localhost
+       abf_flow:
+         ip_address: 192.168.58.128
+         user: admin
+         password: S0mePA$$w0rd
 
-
+         app_name: Payroll
+         name: payroll-server-auth
+         sources: 192.168.12.12
+         destinations: 16.47.71.62,16.47.71.63
+         services: HTTPS,tcp/23
