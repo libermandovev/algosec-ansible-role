@@ -14,7 +14,7 @@ setup(
     packages=["library"],
     url="https://github.com/AlmogCohen/ansible-role-algosec",
     license="MIT",
-    author="@AlmogCohen",
+    author="Almog Cohen",
     description="Set of Ansible modules for Algosec services management",
     long_description=long_description,
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers

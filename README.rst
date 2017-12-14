@@ -5,6 +5,13 @@ Algosec Ansible role provide a set of Ansible modules to help you manage and orc
 
 Documentation available at: http://algosec-ansible-role.readthedocs.io/en/latest/
 
+Installation
+------------
+::
+
+    pip install algosec
+    ansible-galaxy install algosec.algosec
+
 Requirements
 ------------
 
@@ -12,15 +19,7 @@ All modules of this role are dependent upon the `algosec` python package which i
 
     pip install algosec
 
-Role Variables
---------------
 
-See documentation for using the specific modules.
-
-Example Playbook
-----------------
-
-See documentation for using the specific modules.
 
 License
 -------
@@ -32,14 +31,6 @@ Author Information
 
 Algosec Official Website
 https://www.algosec.com/
-
-
-Installation
-------------
-::
-
-    ansible-galaxy install Algosec.algosec
-
 
 Development
 -----------
