@@ -19,6 +19,7 @@
 #
 
 from __future__ import print_function
+
 __metaclass__ = type
 
 import os
@@ -47,22 +48,24 @@ from ansible.utils import module_docs
 TO_OLD_TO_BE_NOTABLE = 1.3
 
 # Get parent directory of the directory this script lives in
-MODULEDIR=os.path.abspath(os.path.join(
+MODULEDIR = os.path.abspath(os.path.join(
     os.path.dirname(os.path.realpath(__file__)), os.pardir, 'lib', 'ansible', 'modules'
 ))
 
 # The name of the DOCUMENTATION template
-EXAMPLE_YAML=os.path.abspath(os.path.join(
+EXAMPLE_YAML = os.path.abspath(os.path.join(
     os.path.dirname(os.path.realpath(__file__)), os.pardir, 'examples', 'DOCUMENTATION.yml'
 ))
 
 _ITALIC = re.compile(r"I\(([^)]+)\)")
-_BOLD   = re.compile(r"B\(([^)]+)\)")
+_BOLD = re.compile(r"B\(([^)]+)\)")
 _MODULE = re.compile(r"M\(([^)]+)\)")
-_URL    = re.compile(r"U\(([^)]+)\)")
-_CONST  = re.compile(r"C\(([^)]+)\)")
+_URL = re.compile(r"U\(([^)]+)\)")
+_CONST = re.compile(r"C\(([^)]+)\)")
 
 DEPRECATED = " (D)"
+
+
 #####################################################################################
 
 def rst_ify(text):
@@ -78,6 +81,7 @@ def rst_ify(text):
         raise AnsibleError("Could not process (%s) : %s" % (str(text), str(e)))
 
     return t
+
 
 #####################################################################################
 
@@ -101,12 +105,14 @@ def rst_fmt(text, fmt):
 
     return fmt % (text)
 
+
 #####################################################################################
 
 def rst_xline(width, char="="):
     ''' return a restructured text line of a given length '''
 
     return char * width
+
 
 #####################################################################################
 
@@ -115,12 +121,13 @@ def write_data(text, options, outputname, module):
 
     if options.output_dir is not None:
         fname = os.path.join(options.output_dir, outputname % module)
-        fname = fname.replace(".py","")
+        fname = fname.replace(".py", "")
         f = open(fname, 'w')
         f.write(text.encode('utf-8'))
         f.close()
     else:
         print(text)
+
 
 #####################################################################################
 
@@ -136,10 +143,10 @@ def list_modules(module_dir, depth=0):
     #   format (they are not executed) so skip the ps1 format files
     # * One glob level for every module level that we're going to traverse
     files = (
-        glob.glob("%s/*.py" % module_dir) +
-        glob.glob("%s/*/*.py" % module_dir) +
-        glob.glob("%s/*/*/*.py" % module_dir) +
-        glob.glob("%s/*/*/*/*.py" % module_dir)
+            glob.glob("%s/*.py" % module_dir) +
+            glob.glob("%s/*/*.py" % module_dir) +
+            glob.glob("%s/*/*/*.py" % module_dir) +
+            glob.glob("%s/*/*/*/*.py" % module_dir)
     )
 
     for module_path in files:
@@ -163,7 +170,7 @@ def list_modules(module_dir, depth=0):
             continue
         if module.startswith("_") and os.path.islink(module_path):
             source = os.path.splitext(os.path.basename(os.path.realpath(module_path)))[0]
-            module = module.replace("_","",1)
+            module = module.replace("_", "", 1)
             aliases[source].add(module)
             continue
 
@@ -176,6 +183,7 @@ def list_modules(module_dir, depth=0):
 
     return module_info, categories, aliases
 
+
 #####################################################################################
 
 def generate_parser():
@@ -187,25 +195,30 @@ def generate_parser():
         description='Generate module documentation from metadata',
     )
 
-    p.add_option("-A", "--ansible-version", action="store", dest="ansible_version", default="unknown", help="Ansible version number")
-    p.add_option("-M", "--module-dir", action="store", dest="module_dir", default=MODULEDIR, help="Ansible library path")
-    p.add_option("-T", "--template-dir", action="store", dest="template_dir", default="hacking/templates", help="directory containing Jinja2 templates")
+    p.add_option("-A", "--ansible-version", action="store", dest="ansible_version", default="unknown",
+                 help="Ansible version number")
+    p.add_option("-M", "--module-dir", action="store", dest="module_dir", default=MODULEDIR,
+                 help="Ansible library path")
+    p.add_option("-T", "--template-dir", action="store", dest="template_dir", default="hacking/templates",
+                 help="directory containing Jinja2 templates")
     p.add_option("-t", "--type", action='store', dest='type', choices=['rst'], default='rst', help="Document type")
     p.add_option("-v", "--verbose", action='store_true', default=False, help="Verbose")
-    p.add_option("-o", "--output-dir", action="store", dest="output_dir", default=None, help="Output directory for module files")
-    p.add_option("-I", "--includes-file", action="store", dest="includes_file", default=None, help="Create a file containing list of processed modules")
+    p.add_option("-o", "--output-dir", action="store", dest="output_dir", default=None,
+                 help="Output directory for module files")
+    p.add_option("-I", "--includes-file", action="store", dest="includes_file", default=None,
+                 help="Create a file containing list of processed modules")
     p.add_option('-V', action='version', help='Show version number and exit')
     return p
+
 
 #####################################################################################
 
 def jinja2_environment(template_dir, typ):
-
     env = Environment(loader=FileSystemLoader(template_dir),
-        variable_start_string="@{",
-        variable_end_string="}@",
-        trim_blocks=True,
-    )
+                      variable_start_string="@{",
+                      variable_end_string="}@",
+                      trim_blocks=True,
+                      )
     env.globals['xline'] = rst_xline
 
     if typ == 'rst':
@@ -220,6 +233,7 @@ def jinja2_environment(template_dir, typ):
 
     return env, template, outputname
 
+
 #####################################################################################
 def too_old(added):
     if not added:
@@ -233,8 +247,8 @@ def too_old(added):
         return False
     return (added_float < TO_OLD_TO_BE_NOTABLE)
 
-def process_module(module, options, env, template, outputname, module_map, aliases):
 
+def process_module(module, options, env, template, outputname, module_map, aliases):
     fname = module_map[module]
     if isinstance(fname, dict):
         return "SKIPPED"
@@ -249,7 +263,7 @@ def process_module(module, options, env, template, outputname, module_map, alias
         if os.path.islink(fname):
             return  # ignore, its an alias
         deprecated = True
-        module = module.replace("_","",1)
+        module = module.replace("_", "", 1)
 
     print("rendering: %s" % module)
 
@@ -271,7 +285,7 @@ def process_module(module, options, env, template, outputname, module_map, alias
 
     all_keys = []
 
-    if not 'version_added' in doc:
+    if 'version_added' not in doc:
         sys.exit("*** ERROR: missing version_added in: %s ***\n" % module)
 
     added = 0
@@ -285,39 +299,40 @@ def process_module(module, options, env, template, outputname, module_map, alias
         del doc['version_added']
 
     if 'options' in doc and doc['options']:
-        for (k,v) in iteritems(doc['options']):
+        for (k, v) in iteritems(doc['options']):
             # don't show version added information if it's too old to be called out
             if 'version_added' in doc['options'][k] and too_old(doc['options'][k]['version_added']):
                 del doc['options'][k]['version_added']
-            if not 'description' in doc['options'][k]:
+            if 'description' not in doc['options'][k]:
                 raise AnsibleError("Missing required description for option %s in %s " % (k, module))
 
             required_value = doc['options'][k].get('required', False)
             if not isinstance(required_value, bool):
-                raise AnsibleError("Invalid required value '%s' for option '%s' in '%s' (must be truthy)" % (required_value, k, module))
-            if not isinstance(doc['options'][k]['description'],list):
+                raise AnsibleError("Invalid required value '%s' for option '%s' in '%s' (must be truthy)" % (
+                    required_value, k, module))
+            if not isinstance(doc['options'][k]['description'], list):
                 doc['options'][k]['description'] = [doc['options'][k]['description']]
 
             all_keys.append(k)
 
     all_keys = sorted(all_keys)
 
-    doc['option_keys']      = all_keys
-    doc['filename']         = fname
-    doc['docuri']           = doc['module'].replace('_', '-')
-    doc['now_date']         = datetime.date.today().strftime('%Y-%m-%d')
-    doc['ansible_version']  = options.ansible_version
-    doc['plainexamples']    = examples  #plain text
-    doc['metadata']         = metadata
+    doc['option_keys'] = all_keys
+    doc['filename'] = fname
+    doc['docuri'] = doc['module'].replace('_', '-')
+    doc['now_date'] = datetime.date.today().strftime('%Y-%m-%d')
+    doc['ansible_version'] = options.ansible_version
+    doc['plainexamples'] = examples  # plain text
+    doc['metadata'] = metadata
 
     if returndocs:
         try:
-            doc['returndocs']       = yaml.safe_load(returndocs)
+            doc['returndocs'] = yaml.safe_load(returndocs)
         except:
             print("could not load yaml: %s" % returndocs)
             raise
     else:
-        doc['returndocs']       = None
+        doc['returndocs'] = None
 
     # here is where we build the table of contents...
 
@@ -327,6 +342,7 @@ def process_module(module, options, env, template, outputname, module_map, alias
         raise AnsibleError("Failed to render doc for %s: %s" % (fname, str(e)))
     write_data(text, options, outputname, module)
     return doc['short_description']
+
 
 #####################################################################################
 
@@ -338,11 +354,12 @@ def print_modules(module, category_file, deprecated, options, env, template, out
     if module in deprecated:
         modstring = modstring + DEPRECATED
 
-    category_file.write("  %s - %s <%s_module>\n" % (to_bytes(modstring), to_bytes(rst_ify(module_map[module][1])), to_bytes(modname)))
+    category_file.write(
+        "  %s - %s <%s_module>\n" % (to_bytes(modstring), to_bytes(rst_ify(module_map[module][1])), to_bytes(modname)))
+
 
 def process_category(category, categories, options, env, template, outputname):
-
-    ### FIXME:
+    # FIXME:
     # We no longer conceptually deal with a mapping of category names to
     # modules to file paths.  Instead we want several different records:
     # (1) Mapping of module names to file paths (what's presently used
@@ -367,7 +384,7 @@ def process_category(category, categories, options, env, template, outputname):
 
     # start a new category file
 
-    category = category.replace("_"," ")
+    category = category.replace("_", " ")
     category = category.title()
 
     modules = []
@@ -406,12 +423,12 @@ def process_category(category, categories, options, env, template, outputname):
 
     sections.sort()
     for section in sections:
-        category_file.write("\n%s\n%s\n\n" % (section.replace("_"," ").title(),'-' * len(section)))
+        category_file.write("\n%s\n%s\n\n" % (section.replace("_", " ").title(), '-' * len(section)))
         category_file.write(".. toctree:: :maxdepth: 1\n\n")
 
         section_modules = module_map[section].keys()
         section_modules.sort(key=lambda k: k[1:] if k.startswith('_') else k)
-        #for module in module_map[section]:
+        # for module in module_map[section]:
         for module in (m for m in section_modules if m in module_info):
             print_modules(module, category_file, deprecated, options, env, template, outputname, module_info, aliases)
 
@@ -423,6 +440,7 @@ def process_category(category, categories, options, env, template, outputname):
     category_file.close()
 
     # TODO: end a new category file
+
 
 #####################################################################################
 
@@ -436,10 +454,10 @@ def validate_options(options):
     if not options.template_dir:
         sys.exit("--template-dir must be specified")
 
+
 #####################################################################################
 
 def main():
-
     p = generate_parser()
 
     (options, args) = p.parse_args()
@@ -481,8 +499,9 @@ def main():
     #
     # Render all the docs to rst via category pages
     #
-    #for category in category_names:
+    # for category in category_names:
     #    process_category(category, categories, options, env, template, outputname)
+
 
 if __name__ == '__main__':
     main()

@@ -22,7 +22,7 @@ author: "Almog Cohen (@AlmogCohen)"
 
 requirements:
     - algosec - python package that should be obtained internally
-    
+
 options:
     ip_address:
         required: true
@@ -98,7 +98,8 @@ is_traffic_allowed:
     type: bool
     sample: True, False
 connectivity_status:
-    description: The current connectivity status of the traffic. Can be Allowed, Blocked, Partially Blocked or Not Routed.
+    description: The current connectivity status of the traffic.
+    Can be Allowed, Blocked, Partially Blocked or Not Routed.
     returned:
         - always
     type: string
@@ -112,7 +113,6 @@ change_request_url:
 """
 
 from ansible.module_utils.basic import AnsibleModule
-from ansible.module_utils.pycompat24 import get_exception
 
 try:
     from algosec.api_client import AlgosecFirewallAnalyzerAPIClient, AlgosecFireFlowAPIClient
@@ -155,7 +155,6 @@ def main():
             service=module.params['services'],
         )
     except AlgosecAPIError:
-        exc = get_exception()
         module.fail_json(msg="Error executing traffic simulation query:\n{}".format(traceback.format_exc()))
         return
 

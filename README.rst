@@ -3,6 +3,8 @@ Algosec Ansible Role
 
 Algosec Ansible role provide a set of Ansible modules to help you manage and orchestrate your work with the different Algosec services.
 
+Documentation available at: http://algosec-ansible-role.readthedocs.io/en/latest/
+
 Requirements
 ------------
 
@@ -56,26 +58,10 @@ Debug
 
     pip install ipdb
     python -m ipdb ./library/abf_flow.py ./debug/abf_flow_args.json
-    
-and the `abf_flow_args.json` file should look something like::
-
-    {
-      "ANSIBLE_MODULE_ARGS": {
-        "ip_address": "192.168.58.128",
-        "user": "admin",
-        "password": "SomePassword",
-        "app_name": "Payroll",
-        "name": "new-test-flow",
-        "sources": "192.168.12.12",
-        "destinations": "10.40.22.10"
-      }
-    }
-
-It should match the playbook module used of course.
-
 
 Documentation
 -------------
+Documentation available at: http://algosec-ansible-role.readthedocs.io/en/latest/
 
 **How to build doc's locally?**
     
@@ -89,3 +75,4 @@ Using Spinx::
 
     $ cd docs
     $ make html
+
