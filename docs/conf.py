@@ -18,6 +18,7 @@
 #
 import os
 import sys
+
 sys.path.insert(0, os.path.abspath('.'))
 
 # Get the project root dir, which is the parent dir of this
@@ -29,7 +30,6 @@ project_root = os.path.dirname(cwd)
 # version is used.
 sys.path.insert(0, project_root)
 
-
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -39,8 +39,7 @@ sys.path.insert(0, project_root)
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc',
-    'sphinx.ext.githubpages']
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.githubpages']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -64,6 +63,7 @@ author = u'Almog Cohen'
 #
 
 import library
+
 # The short X.Y version.
 version = library.__version__
 # The full version, including alpha/beta/rc tags.
@@ -87,7 +87,6 @@ pygments_style = 'sphinx'
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
 
-
 # -- Options for HTML output ----------------------------------------------
 
 # Check if building documentation on RTD
@@ -97,10 +96,10 @@ on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 # a list of builtin themes.
 if on_rtd:
     import sphinx_rtd_theme
+
     html_theme = "sphinx_rtd_theme"
     html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
     html_theme = 'default'
-
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -113,12 +112,10 @@ if on_rtd:
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'AlgosecAnsibledoc'
-
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -148,7 +145,6 @@ latex_documents = [
      u'Almog Cohen', 'manual'),
 ]
 
-
 # -- Options for manual page output ---------------------------------------
 
 # One entry per manual page. List of tuples
@@ -157,7 +153,6 @@ man_pages = [
     (master_doc, 'panwansible', u'Algosec Ansible Documentation',
      [author], 1)
 ]
-
 
 # -- Options for Texinfo output -------------------------------------------
 
@@ -173,5 +168,3 @@ texinfo_documents = [
 # -- AutoDoc options ---------------------------------------------------
 
 autodoc_default_flags = ['members']
-
-

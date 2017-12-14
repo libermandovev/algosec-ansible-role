@@ -89,7 +89,7 @@ EXAMPLES = """
 
 RETURN = """
 changed:
-    description: 
+    description:
     returned:
         - always
     type: bool
@@ -156,13 +156,19 @@ def main():
 
         if api.does_flow_exist(app_id, requested_flow):
             changed = False
+            message = "Flow already exists or defined as a subset of another flow."
         else:
             api.create_application_flow(app_id, requested_flow)
             # to finalize the application flow creation, The application's draft version is applied
-            api.apply_application_draft(app_id)
+            try:
+                api.apply_application_draft(app_id)
+            except AlgosecAPIError:
+                # The apply draft operation may fail if it is already applied
+                pass
             changed = True
+            message = "Flow created successfully!"
 
-        module.exit_json(changed=changed, msg="Done!")
+        module.exit_json(changed=changed, msg=message)
 
     except AlgosecAPIError:
         module.fail_json(msg=(traceback.format_exc()))
