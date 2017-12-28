@@ -9,7 +9,6 @@ Installation
 ------------
 ::
 
-    pip install algosec
     ansible-galaxy install algosec.algosec
 
 Requirements
@@ -18,8 +17,7 @@ Requirements
 All modules of this role are dependent upon the `algosec` python package which is distributed separately::
 
     pip install algosec
-
-
+    pip install ansible
 
 License
 -------
@@ -48,7 +46,7 @@ Debug
 ::
 
     pip install ipdb
-    python -m ipdb ./library/abf_flow.py ./debug/abf_flow_args.json
+    python -m ipdb ./library/abf_update_flow.py ./debug/abf_update_flow_args.json
 
 Documentation
 -------------

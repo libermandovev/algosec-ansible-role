@@ -1,10 +1,9 @@
----
 - name: Create a flow on an AlsogsecBusinessFlow App
   hosts: algosec-server
   gather_facts: False
 
   roles:
-    - role: ansible-role-algosec
+    - role: algosec.algosec
 
   tasks:
   - name: Grab the credentials from ansible-vault
@@ -14,13 +13,13 @@
   - name: Create the flow on ABF
     # We use delegation to use the local python interpreter (and virtualenv if enabled)
     delegate_to: localhost
-    abf_flow:
+    abf_update_flow:
       ip_address: "{{ ip_address }}"
       user: "{{ username }}"
       password: "{{ password }}"
 
       app_name: Payroll
-      name: new-test-flow
-      sources: 192.168.12.12,123.123.132.125
-      destinations: 16.47.71.62,234.234.234.232
-      services: HTTPS,http,tcp/53
+      name: payroll-server-auth
+      sources: 192.168.12.12
+      destinations: 16.47.71.62,16.47.71.63
+      services: HTTPS,tcp/23

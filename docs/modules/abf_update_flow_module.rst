@@ -1,7 +1,7 @@
-.. _abf_flow:
+.. _abf_update_flow:
 
 
-abf_flow
+abf_update_flow
 +++++++++
 
 .. versionadded:: 0.1
@@ -101,7 +101,7 @@ Options
            <td></td>
            <td></td>
            <td>
-               <div>Comma separated IP list of traffic sources for the flow</div>
+               <div>Comma separated list of IPs or ABF network objects of traffic sources for the flow</div>
            </td>
        </tr>
        <tr>
@@ -112,7 +112,7 @@ Options
            <td></td>
            <td></td>
            <td>
-               <div>Comma separated IP list of traffic destinations for the flow</div>
+               <div>Comma separated list of IPs or ABF network objects of traffic destinations for the flow</div>
            </td>
        </tr>
        <tr>
@@ -162,6 +162,24 @@ Options
                <div>Comment to attach to the flow</div>
            </td>
        </tr>
+       <tr>
+           <td>apply_draft<br/>
+               <div style="font-size: small;"></div>
+           </td>
+           <td>no</td>
+           <td>True</td>
+           <td></td>
+           <td>
+               <div>
+            Apply the AlgoSec BusinessFlow application draft. Applying the application draft should be done after every batch of flow updates as each draft application may take a few minutes to execute. If you have more than one abf_flow_update module usage in your ansible playbook, it is recommended to set the "apply_draft" to False to all module calls but the last one (that should be True). Make sure that this module is called with "apply_draft" set to True at the last time it is used in an
+            Ansible playbook.
+               </div>
+           </td>
+       </tr>
+    apply_draft:
+        default: True
+        description:
+            -
    </table>
    </br>
 
@@ -179,7 +197,7 @@ Examples
      - name: Create the flow on ABF
        # We use delegation to use the local python interpreter (and virtualenv if enabled)
        delegate_to: localhost
-       abf_flow:
+       abf_update_flow:
          ip_address: 192.168.58.128
          user: admin
          password: S0mePA$$w0rd

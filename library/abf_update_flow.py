@@ -3,14 +3,14 @@
 # TODO: Add copyright data here
 #
 ANSIBLE_METADATA = {
-    'metadata_version': '1.0',
-    'status': ['preview'],
-    'supported_by': 'community'
+    "metadata_version": "1.0",
+    "status": ["preview"],
+    "supported_by": "community"
 }
 
 DOCUMENTATION = """
 ---
-module: abf_flow
+module: abf_update_flow
 short_description: Create new Application Flows on Algosec Business Flow.
 description:
     - If the requested flow is a subset of one of the flows of the relevant Application, flow creation is cancelled.
@@ -40,11 +40,11 @@ options:
     sources:
         required: true
         description:
-            - Comma separated IP list of traffic sources for the flow
+            - Comma separated list of IPs or ABF network objects of traffic sources for the flow
     destinations:
         required: true
         description:
-            - Comma separated IP list of traffic destinations for the flow
+            - Comma separated list of IPs or ABF network objects of traffic destinations for the flow
     services:
         required: true
         description:
@@ -62,9 +62,19 @@ options:
         default: Flow created by AlgosecAnsible
         description:
             - Comment to attach to the flow
+    apply_draft:
+        default: True
+        description:
+            - Apply the AlgoSec BusinessFlow application draft.
+            - Applying the application draft should be done after every batch of flow updates as each draft application
+            may take a few minutes to execute. If you have more than one abf_flow_update module usage in your ansible
+            playbook, it is recommended to set the "apply_draft" to False to all module calls but the last one (that
+            should be True).
+            - Make sure that this module is called with "apply_draft" set to True at the last time it is used in an
+            Ansible playbook.
 
 requirements:
-    - algosec~=0.2.0 (can be obtained from PyPi https://pypi.python.org/pypi/algosec)
+    - algosec~=0.3.0 (can be obtained from PyPi https://pypi.python.org/pypi/algosec)
 """
 
 EXAMPLES = """
@@ -75,7 +85,7 @@ EXAMPLES = """
      - name: Create the flow on ABF
        # We use delegation to use the local python interpreter (and virtualenv if enabled)
        delegate_to: localhost
-       abf_flow:
+       abf_update_flow:
          ip_address: 192.168.58.128
          user: admin
          password: S0mePA$$w0rd
@@ -116,22 +126,22 @@ def main():
         argument_spec=dict(
             # arguments used for creating the flow
             ip_address=dict(required=True),
-            user=dict(required=True, aliases=['username']),
-            password=dict(aliases=['pass', 'pwd'], required=True, no_log=True),
+            user=dict(required=True, aliases=["username"]),
+            password=dict(aliases=["pass", "pwd"], required=True, no_log=True),
             app_name=dict(required=True),
             name=dict(required=False),
-            sources=dict(type='list', required=True),
-            destinations=dict(type='list', required=True),
-            services=dict(type='list', required=True),
-            users=dict(type='list', required=False, default=[]),
-            network_applications=dict(type='list', required=False, default=[]),
+            sources=dict(type="list", required=True),
+            destinations=dict(type="list", required=True),
+            services=dict(type="list", required=True),
+            users=dict(type="list", required=False, default=[]),
+            network_applications=dict(type="list", required=False, default=[]),
             comment=dict(required=False, default="Flow created by AlgosecAnsible"),
-            # custom_fields=dict(type='str', required=False),
+            apply_draft=dict(type="bool", default=True),
         ),
     )
 
     if not HAS_LIB:
-        module.fail_json(msg='algoec package is required for this module')
+        module.fail_json(msg="algoec package is required for this module")
 
     app_name = module.params["app_name"]
     flow_name = module.params["name"]
@@ -157,22 +167,29 @@ def main():
         if api.does_flow_exist(app_id, requested_flow):
             changed = False
             message = "Flow already exists or defined as a subset of another flow."
-        else:
+        elif not module.check_mode:
             api.create_application_flow(app_id, requested_flow)
-            # to finalize the application flow creation, The application's draft version is applied
-            try:
-                api.apply_application_draft(app_id)
-            except AlgosecAPIError:
-                # The apply draft operation may fail if it is already applied
-                pass
+
+            # to finalize the application flow creation, The application"s draft version is applied
+            if module.params["apply_draft"]:
+                try:
+                    api.apply_application_draft(app_id)
+                except AlgosecAPIError:
+                    module.fail_json(
+                        msg="Exception while trying to apply application draft. "
+                            "It is possible that another draft was just applied. "
+                            "You can run the module with apply_draft=False."
+                    )
             changed = True
             message = "Flow created successfully!"
-
+        else:
+            changed = False
+            message = "Flow creation postponed since check mode is on"
         module.exit_json(changed=changed, msg=message)
 
     except AlgosecAPIError:
         module.fail_json(msg=(traceback.format_exc()))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

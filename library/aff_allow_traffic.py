@@ -4,9 +4,9 @@
 import traceback
 
 ANSIBLE_METADATA = {
-    'metadata_version': '1.0',
-    'status': ['preview'],
-    'supported_by': 'community'
+    "metadata_version": "1.0",
+    "status": ["preview"],
+    "supported_by": "community"
 }
 
 DOCUMENTATION = """
@@ -129,19 +129,19 @@ def main():
         supports_check_mode=True,
         argument_spec=dict(
             ip_address=dict(required=True),
-            user=dict(required=True, aliases=['username']),
-            password=dict(aliases=['pass', 'pwd'], required=True, no_log=True),
+            user=dict(required=True, aliases=["username"]),
+            password=dict(aliases=["pass", "pwd"], required=True, no_log=True),
             requester=dict(required=True),
             email=dict(required=True),
-            sources=dict(type='list', required=True),
-            destinations=dict(type='list', required=True),
-            services=dict(type='list', required=True),
-            transport=dict(default='ipv4', required=False, choices=['ipv4', 'ipv6'])
+            sources=dict(type="list", required=True),
+            destinations=dict(type="list", required=True),
+            services=dict(type="list", required=True),
+            transport=dict(default="ipv4", required=False, choices=["ipv4", "ipv6"])
         )
     )
 
     if not HAS_LIB:
-        module.fail_json(msg='algoec package is required for this module')
+        module.fail_json(msg="algoec package is required for this module")
 
     try:
         afa_client = AlgosecFirewallAnalyzerAPIClient(
@@ -150,26 +150,26 @@ def main():
             module.params["password"],
         )
         connectivity_status = afa_client.check_connectivity_status(
-            source=module.params['sources'],
-            dest=module.params['destinations'],
-            service=module.params['services'],
+            source=module.params["sources"],
+            dest=module.params["destinations"],
+            service=module.params["services"],
         )
     except AlgosecAPIError:
         module.fail_json(msg="Error executing traffic simulation query:\n{}".format(traceback.format_exc()))
         return
 
-    response = {'connectivity_status': connectivity_status.value.text}
+    response = {"connectivity_status": connectivity_status.value.text}
     if connectivity_status == DeviceAllowanceState.ALLOWED:
-        module.log('Connectivity check passed. No FireFlow ticket is required')
-        response['is_traffic_allowed'] = True
-        response['changed'] = False
+        module.log("Connectivity check passed. No FireFlow ticket is required")
+        response["is_traffic_allowed"] = True
+        response["changed"] = False
     else:
-        response['is_traffic_allowed'] = False
+        response["is_traffic_allowed"] = False
 
         module.log(
-            'Connectivity status is {}. Opening ticket on Algosec FireFlow at {}'.format(
+            "Connectivity status is {}. Opening ticket on Algosec FireFlow at {}".format(
                 connectivity_status,
-                module.params['ip_address']
+                module.params["ip_address"]
             )
         )
         if not module.check_mode:
@@ -179,30 +179,30 @@ def main():
                     module.params["user"],
                     module.params["password"],
                 )
-                requester = module.params['requester']
+                requester = module.params["requester"]
                 change_request_url = aff_client.create_change_request(
                     # TODO: drop action is not yet supported
                     action=ChangeRequestAction.ALLOW,
                     subject="Allow {} traffic from {} to {} (issued via Ansible)".format(
-                        module.params['services'],
-                        module.params['sources'],
-                        module.params['destinations']
+                        module.params["services"],
+                        module.params["sources"],
+                        module.params["destinations"]
                     ),
                     requester_name=requester,
-                    email=module.params['email'],
-                    sources=module.params['sources'],
-                    destinations=module.params['destinations'],
-                    services=module.params['services'],
+                    email=module.params["email"],
+                    sources=module.params["sources"],
+                    destinations=module.params["destinations"],
+                    services=module.params["services"],
                     description="Traffic change request created by {} directly from Ansible.".format(requester)
                 )
             except AlgosecAPIError:
                 module.fail_json(msg="Error creating change request:\n{}".format(traceback.format_exc()))
                 return
-            response['change_request_url'] = change_request_url
-        response['changed'] = True
+            response["change_request_url"] = change_request_url
+        response["changed"] = True
 
     module.exit_json(**response)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

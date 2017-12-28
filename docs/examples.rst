@@ -4,12 +4,12 @@
 Examples
 ========
 
-abf_flow
+abf_update_flow
 ========
 
     Create new Application Flows on Algosec Business Flow
 
-.. include:: ../examples/abf_flow.yml
+.. include:: ../examples/abf_update_flow.yml
     :literal:
 
 aff_allow_traffic
