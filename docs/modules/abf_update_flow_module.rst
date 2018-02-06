@@ -54,7 +54,7 @@ Options
                <div style="font-size: small;"></div>
            </td>
            <td>yes</td>
-           <td>admin</td>
+           <td></td>
            <td></td>
            <td>
                <div>Username credentials to use for auth.</div>
