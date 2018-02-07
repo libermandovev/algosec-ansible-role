@@ -5,19 +5,35 @@ Algosec Ansible role provides a set of Ansible modules to help you manage and or
 
 Documentation available online at: http://algosec-ansible-role.readthedocs.io/en/latest/
 
+Requirements
+------------
+
+All modules of this role are assumes python2.7 environment::
+
+    pip install algosec
+    pip install ansible
+
 Installation
 ------------
 ::
 
     ansible-galaxy install algosec.algosec
 
-Requirements
-------------
 
-All modules of this role are dependent upon the `algosec` python package which is distributed separately::
+Usage
+--------------
 
-    pip install algosec
-    pip install ansible
+Once installed, you can start using the modules included in this role in your ansible playbooks.
+
+To quickly get up and running a simple example you can follow these steps:
+
+1. Download and unzip locally the examples folder by clicking `here <https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/algosec/algosec-ansible-role/tree/master/examples>`_.
+2. Update authentication credentials in ``vars/algosec-secrets.yml``.
+3. Update your AlgoSec server IP in ``inventory.ini``.
+4. Update the arguments of the relevant modules in one of the playbooks (files with the ``yml`` extension).
+5. Run ``ansible-playbook -i inventory.ini <playbook-filename>.yml``.
+6. You've made it!
+
 
 Documentation
 -------------
@@ -37,7 +53,7 @@ Using Spinx::
 License
 -------
 
-BSD
+BSD (see full license `here <http://algosec-ansible-role.readthedocs.io/en/latest/license.html>`_)
 
 Author Information
 ------------------
