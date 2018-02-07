@@ -8,7 +8,7 @@ Documentation available online at: http://algosec-ansible-role.readthedocs.io/en
 Requirements
 ------------
 
-All modules of this role are assumes python2.7 environment::
+All modules of this role are assumes ``python2.7`` environment::
 
     pip install algosec
     pip install ansible

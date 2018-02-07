@@ -86,7 +86,7 @@ Options
            <td>name<br/>
                <div style="font-size: small;"></div>
            </td>
-           <td>no</td>
+           <td>yes</td>
            <td></td>
            <td></td>
            <td>

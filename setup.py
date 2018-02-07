@@ -33,7 +33,7 @@ setup(
         "Programming Language :: Python :: 2.7",
     ],
     install_requires=[
-        "algosec~=0.3.0",
+        "algosec~=0.4.0",
         "ansible",
     ],
 )

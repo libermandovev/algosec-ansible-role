@@ -2,6 +2,8 @@
 
 # TODO: Add copyright data here
 #
+from algosec.flow_comparison_logic import IsEqualToFlowComparisonLogic
+
 ANSIBLE_METADATA = {
     "metadata_version": "1.0",
     "status": ["preview"],
@@ -34,7 +36,7 @@ options:
         description:
             - BusinessFlow Application to add the flow to.
     name:
-        required: false
+        required: true
         description:
             - Name for the flow to be created
     sources:
@@ -112,7 +114,7 @@ from ansible.module_utils.basic import AnsibleModule
 
 try:
     from algosec.api_client import AlgosecBusinessFlowAPIClient
-    from algosec.errors import AlgosecAPIError
+    from algosec.errors import AlgosecAPIError, EmptyFlowSearch
     from algosec.models import RequestedFlow
     HAS_LIB = True
 except ImportError:
@@ -129,7 +131,7 @@ def main():
             user=dict(required=True, aliases=["username"]),
             password=dict(aliases=["pass", "pwd"], required=True, no_log=True),
             app_name=dict(required=True),
-            name=dict(required=False),
+            name=dict(required=True),
             sources=dict(type="list", required=True),
             destinations=dict(type="list", required=True),
             services=dict(type="list", required=True),
@@ -162,12 +164,30 @@ def main():
             network_services=module.params["services"],
             comment=module.params["comment"],
         )
-        requested_flow.populate(api)
+        # requested_flow.populate(api)
 
-        if api.does_flow_exist(app_id, requested_flow):
+        try:
+            flow = api.get_flow_by_name(app_id, flow_name)
+            if IsEqualToFlowComparisonLogic.is_equal(requested_flow, flow):
+                # Flow exists and is equal to the requested flow
+                delete, create = False, False
+            else:
+                # Flow exists and is different than the requested flow
+                delete, create = True, True
+        except EmptyFlowSearch:
+            # Flow does not exist, create it
+            delete, create = False, True
+
+        if not create:
             changed = False
-            message = "Flow already exists or defined as a subset of another flow."
-        elif not module.check_mode:
+            message = "Flow already exists on AlgoSec BusinessFlow."
+        elif module.check_mode:
+            changed = False
+            message = "Flow creation/update postponed since check mode is on"
+        else:
+            if delete:
+                api.delete_flow_by_name(app_id, flow_name)
+
             api.create_application_flow(app_id, requested_flow)
 
             # to finalize the application flow creation, The application"s draft version is applied
@@ -182,9 +202,7 @@ def main():
                     )
             changed = True
             message = "Flow created successfully!"
-        else:
-            changed = False
-            message = "Flow creation postponed since check mode is on"
+
         module.exit_json(changed=changed, msg=message)
 
     except AlgosecAPIError:
