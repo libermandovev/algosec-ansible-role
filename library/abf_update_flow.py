@@ -153,7 +153,7 @@ def main():
             module.params["user"],
             module.params["password"],
         )
-        app_id = api.get_application_id_by_name(app_name)
+        latest_revision_id = api.get_application_revision_id_by_name(app_name)
 
         requested_flow = RequestedFlow(
             name=flow_name,
@@ -167,7 +167,7 @@ def main():
         # requested_flow.populate(api)
 
         try:
-            flow = api.get_flow_by_name(app_id, flow_name)
+            flow = api.get_flow_by_name(latest_revision_id, flow_name)
             if IsEqualToFlowComparisonLogic.is_equal(requested_flow, flow):
                 # Flow exists and is equal to the requested flow
                 delete, create = False, False
@@ -186,19 +186,21 @@ def main():
             message = "Flow creation/update postponed since check mode is on"
         else:
             if delete:
-                api.delete_flow_by_name(app_id, flow_name)
+                api.delete_flow_by_name(latest_revision_id, flow_name)
+                latest_revision_id = api.get_application_revision_id_by_name(app_name)
 
-            api.create_application_flow(app_id, requested_flow)
+            api.create_application_flow(latest_revision_id, requested_flow)
 
             # to finalize the application flow creation, The application"s draft version is applied
             if module.params["apply_draft"]:
                 try:
-                    api.apply_application_draft(app_id)
-                except AlgosecAPIError:
+                    latest_revision_id = api.get_application_revision_id_by_name(app_name)
+                    api.apply_application_draft(latest_revision_id)
+                except AlgosecAPIError, e:
                     module.fail_json(
                         msg="Exception while trying to apply application draft. "
                             "It is possible that another draft was just applied. "
-                            "You can run the module with apply_draft=False."
+                            "You can run the module with apply_draft=False.\nResponse Json: {}".format(e.response_json)
                     )
             changed = True
             message = "Flow created successfully!"
