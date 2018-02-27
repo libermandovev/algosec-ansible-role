@@ -9,7 +9,7 @@ SOURCEDIR     = .
 BUILDDIR      = _build
 SPHINXAPI     = sphinx-apidoc
 
-FORMATTER = hacking/module_formatter.py
+FORMATTER = formatting/module_formatter.py
 
 # Put it first so that "make" without argument is like "make help".
 help:
@@ -24,7 +24,7 @@ help:
 
 modules:
 	mkdir modules
-	$(FORMATTER) -v -M ../library/ -o modules/ -T hacking/templates/ -t rst -I modules.rst
+	$(FORMATTER) -v -M ../library/ -o modules/ -T formatting/templates/ -t rst -I modules.rst
 
 cleanmodules:
 	@rm -rf modules library.rst

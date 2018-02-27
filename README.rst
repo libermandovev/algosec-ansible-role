@@ -1,24 +1,28 @@
-Algosec Ansible Role
+AlgoSec Ansible Role
 ====================
 
-Algosec Ansible role provides a set of Ansible modules to help you manage and orchestrate your work with the different Algosec services.
+Ansible role to DevOps-ify network security management, leveraging AlgoSec's business-driven security policy management solution
 
 Documentation available online at: http://algosec-ansible-role.readthedocs.io/en/latest/
 
 Requirements
 ------------
 
-All modules of this role are assumes ``python2.7`` environment::
+All modules of this role require ``python2.7`` environment::
 
-    pip install algosec
+    pip install algosec --upgrade
     pip install ansible
 
 Installation
 ------------
-::
+The Ansible role can be installed directly from Ansible Galaxy by running::
 
     ansible-galaxy install algosec.algosec
 
+If the ``ansible-galaxy`` command-line tool is not available (usually shipped with Ansible), or you prefer to download the role package directly,
+navigate to the Ansible Galaxy `role page <https://galaxy.ansible.com/algosec/algosec/>`_ and hit "Download".
+
+Alternately, you can directly navigate to our `GitHub repository <https://github.com/algosec/algosec-ansible-role>`_.
 
 Usage
 --------------
@@ -37,6 +41,8 @@ To quickly get up and running a simple example you can follow these steps:
 
 Documentation
 -------------
+Documentation available online at: http://algosec-ansible-role.readthedocs.io/en/latest/
+
 How to build doc's locally?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Using Docker, running from one folder outside of the project::
@@ -50,15 +56,17 @@ Using Spinx::
     $ cd docs
     $ make html
 
+Then see the ``docs/_build`` folder created for the html files.
+
 License
 -------
 
-BSD (see full license `here <http://algosec-ansible-role.readthedocs.io/en/latest/license.html>`_)
+MIT (see full license `here <http://algosec-ansible-role.readthedocs.io/en/latest/license.html>`_)
 
 Author Information
 ------------------
 
-Algosec Official Website
+AlgoSec Official Website
 https://www.algosec.com/
 
 Development
@@ -72,20 +80,3 @@ Install the requirements for the project::
 
     pip install -r requirements.txt
 
-Debug
------
-First install ``ipdb`` for easier debugging process::
-
-    pip install ipdb
-
-abf_update_flow
-^^^^^^^^^^^^^^^
-Update the ``./debug/abf_update_flow_args.json`` file with your credentials and command arguments, then run::
-
-    python -m ipdb ./library/abf_update_flow.py ./debug/abf_update_flow_args.json
-
-aff_allow_traffic
-^^^^^^^^^^^^^^^^^^
-Update the ``./debug/aff_allow_traffic_args.json`` file with your credentials and command arguments, then run::
-
-    python -m ipdb ./library/aff_allow_traffic.py ./debug/aff_allow_traffic_args.json

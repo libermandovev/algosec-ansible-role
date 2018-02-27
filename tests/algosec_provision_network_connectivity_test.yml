@@ -4,7 +4,7 @@
   gather_facts: False
 
   roles:
-    - role: algosec.algosec
+    - role: ansible-role-algosec
 
   tasks:
   - name: Grab the credentials from ansible-vault
@@ -14,17 +14,17 @@
   - name: Create Traffic Change Request
     # We use delegation to use the local python interpreter (and virtualenv if enabled)
     delegate_to: localhost
-    aff_allow_traffic:
+    algosec_provision_network_connectivity:
       ip_address: "{{ ip_address }}"
       user: "{{ username }}"
       password: "{{ password }}"
+      certify_ssl: false
 
-      requester: Almog Cohen
+      requestor: Almog Cohen
       email: almog@email.com
-      sources: 192.168.12.12,123.123.132.123
-      destinations: 16.47.71.62,234.234.234.234
-      services: HTTPS,http,tcp/80,tcp/51
-      transport: ipv4
+      sources: ["192.168.12.12", "123.123.132.123"]
+      destinations: ["16.47.71.62", "234.234.234.234"]
+      services: ["HTTPS", "http", "tcp/80", "tcp/51"]
     register: result
 
   - name: Print the test results

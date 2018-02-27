@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Algosec Ansible documentation build configuration file, created by
+# AlgoSec Ansible documentation build configuration file, created by
 # sphinx-quickstart on Mon May  8 12:32:52 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -53,8 +53,8 @@ source_suffix = ['.rst']
 master_doc = 'index'
 
 # General information about the project.
-project = u'Algosec Ansible Role'
-copyright = u'2017, Algosec Systems Ltd.'
+project = u'AlgoSec Ansible Role'
+copyright = u'2017, AlgoSec Systems Ltd.'
 author = u'Almog Cohen'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -115,7 +115,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'AlgosecAnsibledoc'
+htmlhelp_basename = 'AlgoSecAnsibledoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -141,7 +141,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'AlgosecAnsible.tex', u'Algosec Ansible Documentation',
+    (master_doc, 'AlgoSecAnsible.tex', u'AlgoSec Ansible Documentation',
      u'Almog Cohen', 'manual'),
 ]
 
@@ -150,7 +150,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'panwansible', u'Algosec Ansible Documentation',
+    (master_doc, 'panwansible', u'AlgoSec Ansible Documentation',
      [author], 1)
 ]
 
@@ -160,8 +160,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'AlgosecAnsible', u'Algosec Ansible Documentation',
-     author, 'AlgosecAnsible', 'One line description of project.',
+    (master_doc, 'AlgoSecAnsible', u'AlgoSec Ansible Documentation',
+     author, 'AlgoSecAnsible', 'One line description of project.',
      'Miscellaneous'),
 ]
 

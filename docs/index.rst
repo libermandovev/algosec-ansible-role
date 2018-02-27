@@ -1,16 +1,14 @@
 
-Algosec Ansible documentation!
-=========================================
+AlgoSec Ansible documentation!
+==============================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
 
    readme
    modules
    examples
-   history
-   authors
    license
    support
 

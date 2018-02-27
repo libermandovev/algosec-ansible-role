@@ -1,0 +1,26 @@
+{
+  "ANSIBLE_MODULE_ARGS": {
+    "ip_address": "192.168.58.128",
+    "user": "admin",
+    "password": "algosec",
+    "certify_ssl": false,
+    "app_name": "TEST",
+    "app_flows": {
+      "flow-that-will-change": {
+        "sources": ["HR Payroll server", "192.168.0.0/16"],
+        "destinations": ["16.47.71.62"],
+        "services": ["HTTPS"]
+      },
+      "flow-that-will-not-change": {
+        "sources": ["10.0.0.1"],
+        "destinations": ["10.0.0.2"],
+        "services": ["udp/501"]
+      },
+      "second-run-new-flow": {
+        "sources": ["1.2.3.4"],
+        "destinations": ["3.4.5.6"],
+        "services": ["SSH"]
+      }
+    }
+  }
+}

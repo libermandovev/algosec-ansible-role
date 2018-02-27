@@ -4,18 +4,27 @@
 Examples
 ========
 
-abf_update_flow
-========
+algosec_define_application_flows
+================================
 
-    Create new Application Flows on Algosec Business Flow
+    Match the application flows of an AlgoSec BusinessFlow application to a requested configuration
 
-.. include:: ../examples/abf_update_flow.yml
+.. include:: ../examples/algosec_define_application_flows.yml
     :literal:
 
-aff_allow_traffic
-=================
 
-    Check and create traffic change requests with Algosec FireFlow.
+algosec_add_single_application_flow
+===================================
 
-.. include:: ../examples/aff_allow_traffic.yml
+    Create new Application Flows on AlgoSec BusinessFlow
+
+.. include:: ../examples/algosec_add_single_application_flow.yml
+    :literal:
+
+algosec_provision_network_connectivity
+======================================
+
+    Check and create traffic change requests with AlgoSec FireFlow.
+
+.. include:: ../examples/algosec_provision_network_connectivity.yml
     :literal:

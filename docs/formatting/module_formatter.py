@@ -199,7 +199,7 @@ def generate_parser():
                  help="Ansible version number")
     p.add_option("-M", "--module-dir", action="store", dest="module_dir", default=MODULEDIR,
                  help="Ansible library path")
-    p.add_option("-T", "--template-dir", action="store", dest="template_dir", default="hacking/templates",
+    p.add_option("-T", "--template-dir", action="store", dest="template_dir", default="formatting/templates",
                  help="directory containing Jinja2 templates")
     p.add_option("-t", "--type", action='store', dest='type', choices=['rst'], default='rst', help="Document type")
     p.add_option("-v", "--verbose", action='store_true', default=False, help="Verbose")

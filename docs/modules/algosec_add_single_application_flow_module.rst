@@ -1,10 +1,10 @@
-.. _abf_update_flow:
+.. _algosec_add_single_application_flow:
 
 
-abf_update_flow
-+++++++++++++++
+algosec_add_single_application_flow
++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: 0.1
+.. versionadded:: 0.1.0
 
 
 .. contents::
@@ -15,12 +15,12 @@ abf_update_flow
 Synopsis
 --------
 
-* Create new Application Flows on Algosec Business Flow.
-* If the requested flow is a subset of one of the flows of the relevant Application, flow creation is cancelled.
+* Create a new application flow on AlgoSec BusinessFlow.
+* Creation is skipped if the requested flow is a contained in one of the existing flows of the relevant application.
 
 
-Requirements (on host that executes module)
--------------------------------------------
+Requirements
+------------
 
   * `algosec` can be obtained from PyPi https://pypi.python.org/pypi/algosec
 
@@ -46,7 +46,7 @@ Options
            <td></td>
            <td></td>
            <td>
-               <div>IP address (or hostname) of the Algosec server.</div>
+               <div>IP address (or hostname) of the AlgoSec server.</div>
            </td>
        </tr>
        <tr>
@@ -69,6 +69,21 @@ Options
            <td></td>
            <td>
                <div>Password credentials to use for auth.</div>
+           </td>
+       </tr>
+       <tr>
+           <td>certify_ssl<br/>
+               <div style="font-size: small;"></div>
+           </td>
+           <td>no</td>
+           <td>True</td>
+           <td></td>
+           <td>
+               <div>
+                  Set whether or not to validate the AlgoSec server SSL certificate.
+                  This flag might be set to False only in testing environments.
+                  It is highly unrecommended to set it to False in production environments.
+               </div>
            </td>
        </tr>
        <tr>
@@ -124,7 +139,7 @@ Options
            <td></td>
            <td>
                <div>
-                    Comma separated list of traffic services to allow in the flow. Services can be as defined on Algosec
+                    Comma separated list of traffic services to allow in the flow. Services can be as defined on AlgoSec
                     BusinessFlow or in a proto/port format (only UDP and TCP are supported as proto. e.g. tcp/50).
                </div>
            </td>
@@ -156,7 +171,7 @@ Options
                <div style="font-size: small;"></div>
            </td>
            <td>no</td>
-           <td>Flow created by AlgosecAnsible</td>
+           <td>Flow created by AlgoSecAnsible</td>
            <td></td>
            <td>
                <div>Comment to attach to the flow</div>
@@ -176,10 +191,6 @@ Options
                </div>
            </td>
        </tr>
-    apply_draft:
-        default: True
-        description:
-            -
    </table>
    </br>
 
@@ -197,7 +208,7 @@ Examples
      - name: Create the flow on ABF
        # We use delegation to use the local python interpreter (and virtualenv if enabled)
        delegate_to: localhost
-       abf_update_flow:
+       algosec_add_single_application_flow:
          ip_address: 192.168.58.128
          user: admin
          password: S0mePA$$w0rd

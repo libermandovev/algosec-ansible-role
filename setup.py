@@ -10,30 +10,24 @@ with open(path.join(here, "README.rst"), encoding="utf-8") as f:
 
 setup(
     name="ansible-role-algosec",
-    version="0.2.0",
+    version="0.3.0",
     packages=["library"],
     url="https://github.com/AlmogCohen/ansible-role-algosec",
     license="MIT",
     author="Almog Cohen",
-    description="Set of Ansible modules for Algosec services management",
+    description="Set of Ansible modules for AlgoSec services management",
     long_description=long_description,
-    # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "Intended Audience :: Information Technology",
-        "Intended Audience :: System Administrators",
-        # "License :: OSI Approved :: Apache Software License",
+        "License :: OSI Approved :: MIT License",
         "Natural Language :: English",
-        "Operating System :: POSIX",
-        "Programming Language :: Python :: 2.7",
-        "Topic :: System :: Installation/Setup",
-        "Topic :: System :: Systems Administration",
-        "Topic :: Utilities",
+        "Topic :: Software Development :: Libraries :: Python Modules",
         "Programming Language :: Python :: 2.7",
     ],
     install_requires=[
-        "algosec~=0.5.0",
+        "algosec~=0.6.0",
         "ansible",
     ],
 )
