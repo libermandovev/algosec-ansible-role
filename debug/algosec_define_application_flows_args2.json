@@ -3,7 +3,6 @@
     "ip_address": "192.168.58.128",
     "user": "admin",
     "password": "algosec",
-    "certify_ssl": false,
     "app_name": "TEST",
     "app_flows": {
       "flow-that-will-change": {

@@ -22,7 +22,7 @@ def main():
             ip_address=dict(required=True),
             user=dict(required=True, aliases=["username"]),
             password=dict(aliases=["pass", "pwd"], required=True, no_log=True),
-            certify_ssl=dict(type="bool", default=True),
+            certify_ssl=dict(type="bool", default=False),
             requestor=dict(required=True),
             email=dict(required=True),
             sources=dict(type="list", required=True),

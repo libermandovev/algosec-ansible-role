@@ -1,6 +1,11 @@
 AlgoSec Ansible Role
 ====================
 
+.. image:: https://readthedocs.org/projects/algosec-ansible-role/badge/
+   :target: http://algosec-ansible-role.readthedocs.io/en/latest/
+   :alt: Documentation Status
+
+
 Ansible role to DevOps-ify network security management, leveraging AlgoSec's business-driven security policy management solution
 
 Documentation available online at: http://algosec-ansible-role.readthedocs.io/en/latest/

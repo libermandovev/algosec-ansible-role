@@ -18,7 +18,6 @@
       ip_address: "{{ ip_address }}"
       user: "{{ username }}"
       password: "{{ password }}"
-      certify_ssl: false
 
       app_name: Payroll
       name: new-test-flow

@@ -18,7 +18,6 @@
       ip_address: "{{ ip_address }}"
       user: "{{ username }}"
       password: "{{ password }}"
-      certify_ssl: false
 
       requestor: Almog Cohen
       email: almog@email.com

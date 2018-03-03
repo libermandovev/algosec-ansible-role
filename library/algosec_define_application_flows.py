@@ -47,7 +47,7 @@ def main():
             ip_address=dict(required=True),
             user=dict(required=True, aliases=["username"]),
             password=dict(aliases=["pass", "pwd"], required=True, no_log=True),
-            certify_ssl=dict(type="bool", default=True),
+            certify_ssl=dict(type="bool", default=False),
             app_name=dict(required=True),
             # flow name --> flow definition
             app_flows=dict(type="dict", required=True),

@@ -20,7 +20,6 @@
       password: "{{ password }}"
 
       app_name: TEST
-      certify_ssl: false
       app_flows:
         some-flow:
           sources: ["192.168.12.12" ,"HR Payroll server", "192.168.0.0/16"]
@@ -45,7 +44,6 @@
       ip_address: "{{ ip_address }}"
       user: "{{ username }}"
       password: "{{ password }}"
-      certify_ssl: false
       app_name: "{{ item.app_name}}"
       app_flows: "{{item.app_flows}}"
     with_items: "{{ flows_data.applications }}"
