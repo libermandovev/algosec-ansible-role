@@ -28,6 +28,7 @@ def main():
             sources=dict(type="list", required=True),
             destinations=dict(type="list", required=True),
             services=dict(type="list", required=True),
+            template=dict(default=None, required=False),
         )
     )
 
@@ -43,7 +44,7 @@ def main():
         )
         connectivity_status = afa_client.run_traffic_simulation_query(
             source=module.params["sources"],
-            dest=module.params["destinations"],
+            destination=module.params["destinations"],
             service=module.params["services"],
         )
     except AlgoSecAPIError:
@@ -84,7 +85,8 @@ def main():
                     sources=module.params["sources"],
                     destinations=module.params["destinations"],
                     services=module.params["services"],
-                    description="Traffic change request created by {} directly from Ansible.".format(requestor)
+                    description="Traffic change request created by {} directly from Ansible.".format(requestor),
+                    template=module.params["template"],
                 )
             except AlgoSecAPIError:
                 module.fail_json(msg="Error creating change request:\n{}".format(traceback.format_exc()))

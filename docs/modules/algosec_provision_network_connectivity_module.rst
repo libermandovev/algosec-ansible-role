@@ -144,6 +144,17 @@ Options
                </div>
            </td>
        </tr>
+      <tr>
+           <td>template<br/>
+               <div style="font-size: small;"></div>
+           </td>
+           <td>no</td>
+           <td>None</td>
+           <td></td>
+           <td>
+               <div>Full name of the template to use for the newly created change request.</div>
+           </td>
+       </tr>
    </table>
    </br>
 
