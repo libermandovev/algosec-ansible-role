@@ -46,7 +46,12 @@ To quickly get up and running a simple example you can follow these steps:
 
 Documentation
 -------------
-Documentation available online at: http://algosec-ansible-role.readthedocs.io/en/latest/
+
+.. image:: https://readthedocs.org/projects/algosec-ansible-role/badge/
+   :target: https://algosec-ansible-role.readthedocs.io/en/latest/
+   :alt: Documentation Status
+
+Documentation available online at: https://algosec-ansible-role.readthedocs.io/en/latest/
 
 How to build doc's locally?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
