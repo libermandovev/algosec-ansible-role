@@ -82,11 +82,11 @@ https://www.algosec.com/
 Development
 -----------
 
-First create a virtual environment for the project::
+To kickoff local development, just use `pipenv`::
 
-    mkvirtualenv algosecansibleenv
+    pipenv install
     
-Install the requirements for the project::
+And to use the newly installed virtual environment just run::
 
-    pip install -r requirements.txt
+    pipenv shell
 
