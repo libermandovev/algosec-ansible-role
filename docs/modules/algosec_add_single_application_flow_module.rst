@@ -209,7 +209,7 @@ Examples
        # We use delegation to use the local python interpreter (and virtualenv if enabled)
        delegate_to: localhost
        algosec_add_single_application_flow:
-         ip_address: 192.168.58.128
+         ip_address: local.algosec.com
          user: admin
          password: S0mePA$$w0rd
 

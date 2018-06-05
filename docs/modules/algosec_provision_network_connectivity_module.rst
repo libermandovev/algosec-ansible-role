@@ -172,7 +172,7 @@ Examples
        # We use delegation to use the local python interpreter (and virtualenv if enabled)
        delegate_to: localhost
        algosec_provision_network_connectivity:
-         ip_address: 192.168.58.128
+         ip_address: local.algosec.com
          user: admin
          password: S0mePA$$w0rd
 
@@ -204,7 +204,7 @@ Return Values
            <td> URL for the change request ticket on the AlgoSec server.</td>
            <td align=center> success</td>
            <td align=center> string</td>
-           <td align=center> https://192.168.58.128/FireFlow/Ticket/Display.html?id=4447</td>
+           <td align=center> https://local.algosec.com/FireFlow/Ticket/Display.html?id=4447</td>
        </tr>
    </table>
    </br></br>

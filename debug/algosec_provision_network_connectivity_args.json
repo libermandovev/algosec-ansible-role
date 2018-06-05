@@ -1,6 +1,6 @@
 {
   "ANSIBLE_MODULE_ARGS": {
-    "ip_address": "192.168.58.128",
+    "ip_address": "local.algosec.com",
     "user": "admin",
     "password": "algosec",
     "requestor": "Almog Cohen",
