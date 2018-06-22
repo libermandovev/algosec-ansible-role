@@ -147,8 +147,8 @@ def main():
                 api.apply_application_draft(app_revision_id)
                 changed = True
                 msg = "App flows updated successfully and application draft was applied!"
-            except AlgoSecAPIError:
-                module.fail_json(msg="Exception while trying to apply application draft.")
+            except AlgoSecAPIError, e:
+                module.fail_json(msg="Exception while trying to apply application draft: {}".format(e.response_json))
 
         # Query for the list of blocking flows (check only flows that were not changed)
         if module.params["check_connectivity"]:

@@ -10,7 +10,7 @@ with open(path.join(here, "README.rst"), encoding="utf-8") as f:
 
 setup(
     name="ansible-role-algosec",
-    version="0.3.0",
+    version="0.3.1",
     packages=["library"],
     url="https://github.com/AlmogCohen/ansible-role-algosec",
     license="MIT",
@@ -27,7 +27,7 @@ setup(
         "Programming Language :: Python :: 2.7",
     ],
     install_requires=[
-        "algosec>=0.7.0",
+        "algosec>=0.8.0",
         "ansible",
     ],
 )

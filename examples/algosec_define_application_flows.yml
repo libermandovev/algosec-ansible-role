@@ -11,29 +11,6 @@
     include_vars: 'algosec-secrets.yml'
     no_log: 'yes'
 
-  - name: Set App flows on ABF using inline configuration
-    # We use delegation to use the local python interpreter (and virtualenv if enabled)
-    delegate_to: localhost
-    algosec_define_application_flows:
-      ip_address: "{{ ip_address }}"
-      user: "{{ username }}"
-      password: "{{ password }}"
-
-      app_name: TEST
-      app_flows:
-        some-flow:
-          sources: ["192.168.12.12" ,"HR Payroll server", "192.168.0.0/16"]
-          destinations: ["16.47.71.62", "234.234.234.234"]
-          services: ["HTTPS", "http", "tcp/80", "tcp/51"]
-        another-flow:
-          sources: ["192.168.12.1"]
-          destinations: ["192.168.12.2"]
-          services: ["tcp/200"]
-        new-flow:
-          sources: ["192.168.12.1"]
-          destinations: ["192.168.12.3"]
-          services: ["tcp/201"]
-
   - name: Set App flows on ABF using JSON configuration loaded from file
     # We use delegation to use the local python interpreter (and virtualenv if enabled)
     delegate_to: localhost
