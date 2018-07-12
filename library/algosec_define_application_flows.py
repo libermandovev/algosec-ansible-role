@@ -7,7 +7,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 try:
     from algosec.api_client import BusinessFlowAPIClient
-    from algosec.errors import AlgoSecAPIError, EmptyFlowSearch
+    from algosec.errors import AlgoSecAPIError
     from algosec.models import RequestedFlow
     from algosec.flow_comparison_logic import IsEqualToFlowComparisonLogic
 
@@ -36,7 +36,10 @@ def validate_app_flows(app_flows):
         for list_field in FLOW_LIST_FIELDS:
             if not isinstance(flow.get(list_field, []), (list, tuple)):
                 raise ValueError(
-                    "application flow '{}': field '{}' should be a list of strings. (got: {})".format(flow_name, list_field, str(type(list_field)))
+                    "application flow '{}': field '{}' should be a list of strings. (got: {})".format(
+                        flow_name,
+                        list_field, str(type(list_field))
+                    )
                 )
 
 

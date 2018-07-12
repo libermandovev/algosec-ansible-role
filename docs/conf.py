@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 #
+# flake8: noqa
+#
 # AlgoSec Ansible documentation build configuration file, created by
 # sphinx-quickstart on Mon May  8 12:32:52 2017.
 #

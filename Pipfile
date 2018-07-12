@@ -12,3 +12,4 @@ python_version = "2.7"
 
 [dev-packages]
 ipdb = "*"
+"flake8" = "*"
