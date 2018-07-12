@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-algosec = ">=0.8.0"
+algosec = "==0.9.*"
 ansible = "*"
 
 [requires]

@@ -8,7 +8,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 try:
     from algosec.api_client import FirewallAnalyzerAPIClient, FireFlowAPIClient
     from algosec.errors import AlgoSecAPIError
-    from algosec.models import DeviceAllowanceState, ChangeRequestAction
+    from algosec.models import DeviceAllowanceState, ChangeRequestAction, ChangeRequestTrafficLine
 
     HAS_LIB = True
 except ImportError:
@@ -72,9 +72,16 @@ def main():
                     module.params["certify_ssl"],
                 )
                 requestor = module.params["requestor"]
-                change_request_url = aff_client.create_change_request(
-                    # TODO: drop action is not yet supported
+
+                traffic_line = ChangeRequestTrafficLine(
+                    # TODO: drop action is not supported in this role
                     action=ChangeRequestAction.ALLOW,
+                    sources=module.params["sources"],
+                    destinations=module.params["destinations"],
+                    services=module.params["services"],
+                )
+
+                change_request_url = aff_client.create_change_request(
                     subject="Allow {} traffic from {} to {} (issued via Ansible)".format(
                         module.params["services"],
                         module.params["sources"],
@@ -82,9 +89,7 @@ def main():
                     ),
                     requestor_name=requestor,
                     email=module.params["email"],
-                    sources=module.params["sources"],
-                    destinations=module.params["destinations"],
-                    services=module.params["services"],
+                    traffic_lines=[traffic_line],
                     description="Traffic change request created by {} directly from Ansible.".format(requestor),
                     template=module.params["template"],
                 )
