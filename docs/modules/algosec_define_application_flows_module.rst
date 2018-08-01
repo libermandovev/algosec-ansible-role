@@ -108,7 +108,7 @@ Options
            <td></td>
            <td>
                <div>
-                  Full list of application flows to be applied. The configuration can be also provided from a JSON file.
+                  Dictionary of application flows to be applied. The configuration can be also provided from a JSON file.
                   Please usage examples in the `Examples`_ section.
                </div>
            </td>
@@ -193,72 +193,11 @@ Return Values
 Examples
 --------
 
- ::
-
-   - name: Update application flows of an AlgoSec BusinessFlow application
-     hosts: algosec-server
-     gather_facts: False
-
-     roles:
-       - role: algosec.algosec
-
-     tasks:
-     - name: Grab AlgoSec credentials from ansible-vault
-       include_vars: 'algosec-secrets.yml'
-       no_log: 'yes'
-
-     - name: Set App flows on ABF using JSON configuration loaded from file
-       # We use delegation to use the local python interpreter (and virtualenv if enabled)
-       delegate_to: localhost
-       vars:
-         flows_data: "{{ lookup('file','vars/application-flows.json')|from_json }}"
-
-       algosec_define_application_flows:
-         ip_address: "{{ ip_address }}"
-         user: "{{ username }}"
-         password: "{{ password }}"
-         app_name: "{{ item.app_name}}"
-         app_flows: "{{item.app_flows}}"
-       with_items: "{{ flows_data.applications }}"
-
+.. include:: ../../examples/algosec_define_application_flows.yml
+    :literal:
 
 Example For Application Flows JSON File
 ---------------------------------------
 
- ::
-
-   {
-     "applications": [
-       {
-         "app_name": "TEST",
-         "app_flows": {
-           "flow1": {
-             "sources": ["HR Payroll server", "192.168.0.0/16"],
-             "destinations": ["16.47.71.62"],
-             "services": ["HTTPS"]
-           },
-           "flow2": {
-             "sources": ["10.0.0.1"],
-             "destinations": ["10.0.0.2"],
-             "services": ["udp/501"]
-           },
-           "flow3": {
-             "sources": ["1.2.3.4"],
-             "destinations": ["3.4.5.6"],
-             "services": ["SSH"]
-           }
-         }
-       },
-       {
-         "app_name": "ANOTHER-APP",
-         "app_flows": {
-           "new-flow": {
-             "sources": ["1.2.3.4"],
-             "destinations": ["3.4.5.6"],
-             "services": ["SSH"]
-           }
-         }
-       }
-     ]
-   }
-
+.. include:: ../../examples/vars/application-flows.json
+    :literal:

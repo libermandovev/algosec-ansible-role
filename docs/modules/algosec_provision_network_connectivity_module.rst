@@ -163,28 +163,8 @@ Options
 Examples
 --------
 
- ::
-
-   - name: Create Traffic Change Request if needed
-     hosts: algosec-server
-
-     - name: Create Traffic Change Request
-       # We use delegation to use the local python interpreter (and virtualenv if enabled)
-       delegate_to: localhost
-       algosec_provision_network_connectivity:
-         ip_address: local.algosec.com
-         user: admin
-         password: S0mePA$$w0rd
-
-         requestor: almogco
-         email: almog@email.com
-         sources: 192.168.12.12,123.123.132.123
-         destinations: 16.47.71.62,234.234.234.234
-         services: HTTPS,http,tcp/80,tcp/51
-       register: result
-
-     - name: Print the test results
-       debug: var=result
+.. include:: ../../examples/algosec_provision_network_connectivity.yml
+    :literal:
 
 Return Values
 -------------

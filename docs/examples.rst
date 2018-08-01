@@ -12,6 +12,12 @@ algosec_define_application_flows
 .. include:: ../examples/algosec_define_application_flows.yml
     :literal:
 
+Example For Application Flows JSON File
+---------------------------------------
+
+.. include:: ../examples/vars/application-flows.json
+    :literal:
+
 
 algosec_add_single_application_flow
 ===================================

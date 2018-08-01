@@ -21,7 +21,7 @@ ALLOWED_FLOW_CONNECTIVITY = "Pass"
 
 def validate_app_flows(app_flows):
     """
-    Verify the data structure of the requested app flows requsted by the user
+    Verify the data structure of the requested app flows
 
     Its very common mistake that the users pass strings instead of lists of strings
     """

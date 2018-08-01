@@ -199,22 +199,6 @@ Options
 Examples
 --------
 
- ::
+.. include:: ../examples/algosec_add_single_application_flow.yml
+    :literal:
 
-   - name: Create a flow on an AlsogsecBusinessFlow App
-     hosts: algosec-server
-
-     tasks:
-     - name: Create the flow on ABF
-       # We use delegation to use the local python interpreter (and virtualenv if enabled)
-       delegate_to: localhost
-       algosec_add_single_application_flow:
-         ip_address: local.algosec.com
-         user: admin
-         password: S0mePA$$w0rd
-
-         app_name: Payroll
-         name: payroll-server-auth
-         sources: 192.168.12.12
-         destinations: 16.47.71.62,16.47.71.63
-         services: HTTPS,tcp/23
