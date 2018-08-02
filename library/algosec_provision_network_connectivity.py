@@ -45,7 +45,10 @@ def main():
         module.fail_json(msg="algoec package is required for this module")
 
     # Validate the structure of the traffic lines provided by the user
-    traffic_lines = TrafficLineSchema().load(module.params["traffic_lines"], many=True).data
+    result = TrafficLineSchema().load(module.params["traffic_lines"], many=True)
+    if result.errors:
+        raise ValueError("Incorrect data structure provided for traffic lines: {}".format(result.errors))
+    traffic_lines = result.data
 
     traffic_lines_to_create = []
 
