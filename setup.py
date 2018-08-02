@@ -10,7 +10,7 @@ with open(path.join(here, "README.rst"), encoding="utf-8") as f:
 
 setup(
     name="ansible-role-algosec",
-    version="0.5.0",
+    version="0.5.1",
     packages=["library"],
     url="https://github.com/AlmogCohen/ansible-role-algosec",
     license="MIT",
