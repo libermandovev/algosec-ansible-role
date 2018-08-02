@@ -29,5 +29,6 @@ setup(
     install_requires=[
         "algosec==0.9.*",
         "ansible",
+        "marshmallow",
     ],
 )

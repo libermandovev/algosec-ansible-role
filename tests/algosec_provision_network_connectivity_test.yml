@@ -21,9 +21,17 @@
 
       requestor: Almog Cohen
       email: almog@email.com
-      sources: ["192.168.12.12", "123.123.132.123"]
-      destinations: ["16.47.71.62", "234.234.234.234"]
-      services: ["HTTPS", "http", "tcp/80", "tcp/51"]
+      traffic_lines:
+        # This is an 'allow' traffic line
+        - action: true
+          sources: ["192.168.12.12", "123.123.132.123"]
+          destinations: ["16.47.71.62", "234.234.234.234"]
+          services: ["HTTPS", "http", "tcp/80", "tcp/51"]
+        # This is a drop traffic line
+        - action: false
+          sources: ["10.0.0.1"]
+          destinations: ["10.0.1.0"]
+          services: ["HTTPS"]
     register: result
 
   - name: Print the test results

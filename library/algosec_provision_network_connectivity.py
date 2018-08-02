@@ -2,6 +2,9 @@ import traceback
 
 import urllib3
 from ansible.module_utils.basic import AnsibleModule
+from marshmallow import Schema, fields
+
+NO_TRAFFIC_LINES_TO_CREATE = 0
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -15,6 +18,14 @@ except ImportError:
     HAS_LIB = False
 
 
+class TrafficLineSchema(Schema):
+    """Define the schema for the traffic lines provided by the user"""
+    action = fields.Boolean(required=True)
+    sources = fields.List(fields.Str(), required=True)
+    destinations = fields.List(fields.Str(), required=True)
+    services = fields.List(fields.Str(), required=True)
+
+
 def main():
     module = AnsibleModule(
         supports_check_mode=True,
@@ -25,15 +36,18 @@ def main():
             certify_ssl=dict(type="bool", default=False),
             requestor=dict(required=True),
             email=dict(required=True),
-            sources=dict(type="list", required=True),
-            destinations=dict(type="list", required=True),
-            services=dict(type="list", required=True),
+            traffic_lines=dict(type="list", required=True),
             template=dict(default=None, required=False),
         )
     )
 
     if not HAS_LIB:
         module.fail_json(msg="algoec package is required for this module")
+
+    # Validate the structure of the traffic lines provided by the user
+    traffic_lines = TrafficLineSchema().load(module.params["traffic_lines"], many=True).data
+
+    traffic_lines_to_create = []
 
     try:
         afa_client = FirewallAnalyzerAPIClient(
@@ -42,24 +56,46 @@ def main():
             module.params["password"],
             module.params["certify_ssl"],
         )
-        connectivity_status = afa_client.run_traffic_simulation_query(
-            source=module.params["sources"],
-            destination=module.params["destinations"],
-            service=module.params["services"],
-        )
+
+        for traffic_line in traffic_lines:
+            # Make the network simulation query to see in the traffic line is needed
+            connectivity_status = afa_client.run_traffic_simulation_query(
+                source=traffic_line["sources"],
+                destination=traffic_line["destinations"],
+                service=traffic_line["services"],
+            )
+
+            action = ChangeRequestAction.ALLOW if traffic_line["action"] else ChangeRequestAction.DROP
+            # If simulation query result matches the user's request, do nothing
+            if action == ChangeRequestAction.ALLOW and connectivity_status == DeviceAllowanceState.ALLOWED:
+                continue
+            if action == ChangeRequestAction.DROP and connectivity_status == DeviceAllowanceState.BLOCKED:
+                continue
+
+            # A change request is needed for this traffic line
+            traffic_lines_to_create.append(
+                ChangeRequestTrafficLine(
+                    action=action,
+                    sources=traffic_line["sources"],
+                    destinations=traffic_line["destinations"],
+                    services=traffic_line["services"],
+                )
+            )
+
     except AlgoSecAPIError:
         module.fail_json(msg="Error executing traffic simulation query:\n{}".format(traceback.format_exc()))
         return
 
     response = {}
-    if connectivity_status == DeviceAllowanceState.ALLOWED:
-        module.log("Connectivity check passed. No FireFlow change request is required")
+    if len(traffic_lines_to_create) == NO_TRAFFIC_LINES_TO_CREATE:
+        module.log("Connectivity check passed for all traffic lines. No FireFlow change request is required.")
         response["changed"] = False
     else:
 
         module.log(
-            "Connectivity status is {}. Opening change request on AlgoSec FireFlow at {}".format(
-                connectivity_status,
+            "Connectivity status require a change for {} traffic lines. Opening change request on AlgoSec FireFlow "
+            "at {}".format(
+                traffic_lines_to_create,
                 module.params["ip_address"]
             )
         )
@@ -73,23 +109,11 @@ def main():
                 )
                 requestor = module.params["requestor"]
 
-                traffic_line = ChangeRequestTrafficLine(
-                    # TODO: drop action is not supported in this role
-                    action=ChangeRequestAction.ALLOW,
-                    sources=module.params["sources"],
-                    destinations=module.params["destinations"],
-                    services=module.params["services"],
-                )
-
                 change_request_url = aff_client.create_change_request(
-                    subject="Allow {} traffic from {} to {} (issued via Ansible)".format(
-                        module.params["services"],
-                        module.params["sources"],
-                        module.params["destinations"]
-                    ),
+                    subject="Change request issued via Ansible",
                     requestor_name=requestor,
                     email=module.params["email"],
-                    traffic_lines=[traffic_line],
+                    traffic_lines=traffic_lines_to_create,
                     description="Traffic change request created by {} directly from Ansible.".format(requestor),
                     template=module.params["template"],
                 )

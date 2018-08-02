@@ -16,7 +16,7 @@ Synopsis
 --------
 
 * Provision network connectivity by creating a change request in AlgoSec FireFlow.
-* No change request is created if traffic is already allowed.
+* No change request is created if traffic is already provisioned correctly.
 
 
 Requirements
@@ -108,30 +108,8 @@ Options
                <div>The email address of the requestor.</div>
            </td>
        </tr>
-      <tr>
-           <td>sources<br/>
-               <div style="font-size: small;"></div>
-           </td>
-           <td>yes</td>
-           <td></td>
-           <td></td>
-           <td>
-               <div>Comma separated list of IP address for the traffic sources.</div>
-           </td>
-       </tr>
-      <tr>
-           <td>destination<br/>
-               <div style="font-size: small;"></div>
-           </td>
-           <td>yes</td>
-           <td></td>
-           <td></td>
-           <td>
-               <div>Comma separated list of IP address for the traffic destinations.</div>
-           </td>
-       </tr>
-      <tr>
-           <td>services<br/>
+       <tr>
+           <td>traffic_lines<br/>
                <div style="font-size: small;"></div>
            </td>
            <td>yes</td>
@@ -139,8 +117,23 @@ Options
            <td></td>
            <td>
                <div>
-               List of services of the traffic to allow. Accepted services are as defined on AlgoSec or by port/proto format
-               (e.g. tcp/50,udp/100,ssh).
+                  List of dictionaries, each define a traffic lines that should be added into the change request. Each traffic_line dict object should contain the following keys: <b>action</b>, <b>sources</b>, <b>destinations</b>and <b>services</b>.
+                  <br>
+                    <ul>
+                        <li>
+                            <b>action</b> - Boolean. True to allow traffic or False to drop it.
+                        </li>
+                        <li>
+                            <b>sources</b> - list of IP addresses or BusinessFlow objects
+                        </li>
+                        <li>
+                            <b>destinations</b> - list of IP addresses or BusinessFlow objects
+                        </li>
+                        <li>
+                            <b>services</b> - list of services of the traffic to allow. Accepted services are as defined on AlgoSec BusinessFlow or by port/proto format (e.g. tcp/50,udp/100,ssh).
+                        </li>
+                    </ul>
+                  Please usage examples in the `Examples`_ section.
                </div>
            </td>
        </tr>

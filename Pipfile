@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 algosec = "==0.9.*"
 ansible = "*"
+marshmallow = "*"
 
 [requires]
 python_version = "2.7"

@@ -16,7 +16,7 @@ Requirements
 All modules of this role require ``python2.7`` environment::
 
     pip install algosec --upgrade
-    pip install ansible
+    pip install ansible marshmallow
 
 Installation
 ------------
