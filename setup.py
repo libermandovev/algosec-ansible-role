@@ -25,10 +25,12 @@ setup(
         "Natural Language :: English",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3.6",
     ],
     install_requires=[
-        "algosec==0.9.*",
+        "algosec>=1.3.0",
         "ansible",
         "marshmallow",
+        "urllib3",
     ],
 )

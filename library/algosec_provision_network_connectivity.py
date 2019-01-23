@@ -9,7 +9,8 @@ NO_TRAFFIC_LINES_TO_CREATE = 0
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 try:
-    from algosec.api_client import FirewallAnalyzerAPIClient, FireFlowAPIClient
+    from algosec.api_clients.fire_flow import FireFlowAPIClient
+    from algosec.api_clients.firewall_analyzer import FirewallAnalyzerAPIClient
     from algosec.errors import AlgoSecAPIError
     from algosec.models import DeviceAllowanceState, ChangeRequestAction, ChangeRequestTrafficLine
 
@@ -20,6 +21,9 @@ except ImportError:
 
 class TrafficLineSchema(Schema):
     """Define the schema for the traffic lines provided by the user"""
+    def __init__(self, **kwargs):
+        super(Schema, self).__init__(strict=True, **kwargs)
+
     action = fields.Boolean(required=True)
     sources = fields.List(fields.Str(), required=True)
     destinations = fields.List(fields.Str(), required=True)
@@ -62,11 +66,13 @@ def main():
 
         for traffic_line in traffic_lines:
             # Make the network simulation query to see in the traffic line is needed
-            connectivity_status = afa_client.run_traffic_simulation_query(
+            query_result = afa_client.execute_traffic_simulation_query(
                 source=traffic_line["sources"],
                 destination=traffic_line["destinations"],
                 service=traffic_line["services"],
             )
+
+            connectivity_status = query_result['result']
 
             action = ChangeRequestAction.ALLOW if traffic_line["action"] else ChangeRequestAction.DROP
             # If simulation query result matches the user's request, do nothing

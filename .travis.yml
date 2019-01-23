@@ -1,0 +1,26 @@
+language: python
+python:
+  - '2.7'
+  - '3.5'
+  - '3.6'
+install:
+  - pip install tox-travis codecov flake8
+script:
+  - flake8
+  - tox
+after_success:
+  - codecov
+notifications:
+  email:
+    on_success: never
+    on_failure: always
+deploy:
+  provider: pypi
+  distributions: sdist bdist_wheel
+  user: algosec
+  password:
+    secure: agV0UnmlH6eOIuaBZw00PWNHJoSvutk7A8cqdpLUbdl116D8FvBiahcwsmkZFlPXBz8Za4RwLCpVdNuoLIOVpK24BD85ffbPJHqHfgE5Y4/j3EdfJW4j1cdH+kiaVlR9NHQTYf1KXQ+VC5V22nLECu3mNb7d3goHpq/m4xAGzdE/OLzrOMS5px0nCl9qn0olti5b1pEhbdtKXnQS/MA5jZMgfPHEbx1rVH5IJvXyUFLsJcDS1NxgnTJn69HbFO7fDvkFoBB+coeyJ8UrrTnreC3RxX4WYH/PbY5NqgK+eHOTuRGvtmvaVLyf9T/DAOEqg9WPY9HUUab8AMF/0+MuDcTHV8G99sFnmzezd6HivatFW5BWyUdkFdGNIysveG/iI9ZYAScrd4HjspcOWt0TCiiaaas4xA6wXgDNyOlB4Yw6iGeeZAN9SXN9qs/jdZsMEd2Saa6qhjSG7Tua9FbXADWDHhRlKBCveLCGUcIs3GgV1uVCiT2azCRcCg6hL3RuzicKDQsbfnsaZZR2E891wzVKLtI/CCpXljtuVgoR4agRpQLIc7yMO0q08srR0n1gU4L9nKM19tGDeQrZHjBeb8arWgof31x18iky+KE9IPJWHlQSMFSrtM0DembmZCgLFP+9vpoohxizYq0VnFx2Gv13YcH+JjjLhbJyt7c0QQI=
+  on:
+    tags: true
+    repo: algosec/algosec-ansible-role
+    python: 3.6

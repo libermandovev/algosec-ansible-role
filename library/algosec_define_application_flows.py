@@ -6,7 +6,7 @@ from ansible.module_utils.basic import AnsibleModule
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 try:
-    from algosec.api_client import BusinessFlowAPIClient
+    from algosec.api_clients.business_flow import BusinessFlowAPIClient
     from algosec.errors import AlgoSecAPIError
     from algosec.models import RequestedFlow
     from algosec.flow_comparison_logic import IsEqualToFlowComparisonLogic
@@ -126,7 +126,7 @@ def main():
             is_draft_revision = False
 
             # Delete all flows marked for deletion or modification
-            for flow_name_to_delete in flows_to_delete | modified_flows:
+            for flow_name_to_delete in sorted(flows_to_delete | modified_flows):
                 api.delete_flow_by_id(app_revision_id, current_app_flows[flow_name_to_delete]["flowID"])
                 # update application revision if draft revision was created
                 if not is_draft_revision:
@@ -138,7 +138,7 @@ def main():
                     }
 
             # Create all flows marked for creation or modification
-            for flow_name_to_create in flows_to_create | modified_flows:
+            for flow_name_to_create in sorted(flows_to_create | modified_flows):
                 api.create_application_flow(app_revision_id, requested_flows[flow_name_to_create])
                 # update application revision if draft revision was created
                 if not is_draft_revision:
@@ -150,8 +150,10 @@ def main():
                 api.apply_application_draft(app_revision_id)
                 changed = True
                 msg = "App flows updated successfully and application draft was applied!"
-            except AlgoSecAPIError, e:
-                module.fail_json(msg="Exception while trying to apply application draft: {}".format(e.response_json))
+            except AlgoSecAPIError as e:
+                return module.fail_json(
+                    msg="Exception while trying to apply application draft: {}".format(e.response_content)
+                )
 
         # Query for the list of blocking flows (check only flows that were not changed)
         if module.params["check_connectivity"]:

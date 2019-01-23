@@ -4,13 +4,14 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-algosec = "==0.9.*"
-ansible = "*"
-marshmallow = "*"
+ansible-role-algosec = {editable = true,path = "."}
+
+[dev-packages]
+"flake8" = "*"
+mock = "*"
+vcrpy = "*"
+pytest = "*"
+pytest-cov = "*"
 
 [requires]
 python_version = "2.7"
-
-[dev-packages]
-ipdb = "*"
-"flake8" = "*"

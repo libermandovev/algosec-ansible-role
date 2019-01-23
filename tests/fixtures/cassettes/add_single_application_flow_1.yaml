@@ -1,0 +1,525 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46YWxnb3NlYw==]
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.21.0]
+    method: GET
+    uri: https://local.algosec.com/BusinessFlow/rest/v1/login
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAwIAAAD//6pWyipOLS7OzM/LTFGyUjI0NTM3NzUyMjU1NTR1c3QzcLU0dzUwN3Yy
+        tnQ0NnN0VaoFAAAA//8DANo2rCMxAAAA
+    headers:
+      cache-control: ['no-cache, no-store, max-age=0, must-revalidate']
+      connection: [close]
+      content-encoding: [gzip]
+      content-type: [application/json;charset=utf-8]
+      date: ['Wed, 23 Jan 2019 21:12:48 GMT']
+      expires: ['0']
+      pragma: [no-cache]
+      server: [Apache-Coyote]
+      set-cookie: [JSESSIONID=1567752255515FAF0E97E073B39A36AE; Path=/BusinessFlow;
+          Secure; HttpOnly]
+      strict-transport-security: [max-age=31536000 ; includeSubDomains]
+      transfer-encoding: [chunked]
+      vary: [Accept-Encoding]
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN, DENY]
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=1567752255515FAF0E97E073B39A36AE]
+      User-Agent: [python-requests/2.21.0]
+    method: GET
+    uri: https://local.algosec.com/BusinessFlow/rest/v1/applications/name/Payroll
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAwIAAAD//6STQU/bQBCF/8pqzwHFkMQup0IQalAarASqSojDsJ7gada70e46kYXy
+        3zu2IXEQqIdebHlm3vdmn+1X6XBDnqyZXMuLQRT1JKzXmhSEt1p0xjUDBcoLmULlrNayJ5VDCJhd
+        84VHhoPkLI7j89EoSXp74iJAKD3LLlWgDbJK0xJVpTSmOfgG6GxWqtqqZlpjsB6lUB20WtstZrUY
+        fHhYZ+x45JpEwzgatO05+dU4R7U66vZj3ok7C2Ud677x46bUBh08k6692vpo2KwQQAU2fnyVfNR6
+        x6vSk0Hvxd2WNXIfxg9wrhK3lntcxAJIczWvq9+VLdZgqlO+y11vj0odFcCie1S54Yy1GLeGB+oM
+        MzHDsLVu1cUazP4DegsGxeT+Jxh4aY7wjv3DjVMKRdv4ymGBnEv2T48Cveiw5e6JAy19sMUNoc7a
+        UN+m96GOHYUayO+BtRvQZZMtveTNBh/HU3CB34LgL/MwPfuVzqOTqN9P4lH0qezBUOji519Oialt
+        v/3uuC1Q3C2XpFBML393tVNWcku8Mzoq/lkKNMGfzBoe6CYQDc+oj6K4IQNGYZd6vN/EBHSN/lBL
+        xxPG7f4CAAD//wMApOMAzr8DAAA=
+    headers:
+      cache-control: ['no-cache, no-store, max-age=0, must-revalidate']
+      connection: [close]
+      content-encoding: [gzip]
+      content-type: [application/json;charset=utf-8]
+      date: ['Wed, 23 Jan 2019 21:12:48 GMT']
+      expires: ['0']
+      pragma: [no-cache]
+      server: [Apache-Coyote]
+      strict-transport-security: [max-age=31536000 ; includeSubDomains]
+      transfer-encoding: [chunked]
+      vary: [Accept-Encoding]
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN, DENY]
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=1567752255515FAF0E97E073B39A36AE]
+      User-Agent: [python-requests/2.21.0]
+    method: GET
+    uri: https://local.algosec.com/BusinessFlow/rest/v1/applications/411/flows
+  response:
+    body:
+      string: !!binary |
+        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
+        pp/gwfbDPwAAAP//AwBlXwe8HBoAAA==
+    headers:
+      cache-control: ['no-cache, no-store, max-age=0, must-revalidate']
+      connection: [close]
+      content-encoding: [gzip]
+      content-type: [application/json;charset=utf-8]
+      date: ['Wed, 23 Jan 2019 21:12:48 GMT']
+      expires: ['0']
+      pragma: [no-cache]
+      server: [Apache-Coyote]
+      strict-transport-security: [max-age=31536000 ; includeSubDomains]
+      transfer-encoding: [chunked]
+      vary: [Accept-Encoding]
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN, DENY]
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46YWxnb3NlYw==]
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.21.0]
+    method: GET
+    uri: https://local.algosec.com/BusinessFlow/rest/v1/login
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAwIAAAD//6pWyipOLS7OzM/LTFGyUnIxdHJzszRwcnIxsjSysDA1NjN3NnRzdDQ2
+        NXeyMDIzV6oFAAAA//8DAFehwXsxAAAA
+    headers:
+      cache-control: ['no-cache, no-store, max-age=0, must-revalidate']
+      connection: [close]
+      content-encoding: [gzip]
+      content-type: [application/json;charset=utf-8]
+      date: ['Wed, 23 Jan 2019 21:12:53 GMT']
+      expires: ['0']
+      pragma: [no-cache]
+      server: [Apache-Coyote]
+      set-cookie: [JSESSIONID=D1BFF90BBD292885367C1FAA357B8267; Path=/BusinessFlow;
+          Secure; HttpOnly]
+      strict-transport-security: [max-age=31536000 ; includeSubDomains]
+      transfer-encoding: [chunked]
+      vary: [Accept-Encoding]
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN, DENY]
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=D1BFF90BBD292885367C1FAA357B8267]
+      User-Agent: [python-requests/2.21.0]
+    method: GET
+    uri: https://local.algosec.com/BusinessFlow/rest/v1/applications/name/Payroll
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAwIAAAD//6STQU/bQBCF/8pqzwHFkMQup0IQalAarASqSojDsJ7gada70e46kYXy
+        3zu2IXEQqIdebHlm3vdmn+1X6XBDnqyZXMuLQRT1JKzXmhSEt1p0xjUDBcoLmULlrNayJ5VDCJhd
+        84VHhoPkLI7j89EoSXp74iJAKD3LLlWgDbJK0xJVpTSmOfgG6GxWqtqqZlpjsB6lUB20WtstZrUY
+        fHhYZ+x45JpEwzgatO05+dU4R7U66vZj3ok7C2Ud677x46bUBh08k6692vpo2KwQQAU2fnyVfNR6
+        x6vSk0Hvxd2WNXIfxg9wrhK3lntcxAJIczWvq9+VLdZgqlO+y11vj0odFcCie1S54Yy1GLeGB+oM
+        MzHDsLVu1cUazP4DegsGxeT+Jxh4aY7wjv3DjVMKRdv4ymGBnEv2T48Cveiw5e6JAy19sMUNoc7a
+        UN+m96GOHYUayO+BtRvQZZMtveTNBh/HU3CB34LgL/MwPfuVzqOTqN9P4lH0qezBUOji519Oialt
+        v/3uuC1Q3C2XpFBML393tVNWcku8Mzoq/lkKNMGfzBoe6CYQDc+oj6K4IQNGYZd6vN/EBHSN/lBL
+        xxPG7f4CAAD//wMApOMAzr8DAAA=
+    headers:
+      cache-control: ['no-cache, no-store, max-age=0, must-revalidate']
+      connection: [close]
+      content-encoding: [gzip]
+      content-type: [application/json;charset=utf-8]
+      date: ['Wed, 23 Jan 2019 21:12:53 GMT']
+      expires: ['0']
+      pragma: [no-cache]
+      server: [Apache-Coyote]
+      strict-transport-security: [max-age=31536000 ; includeSubDomains]
+      transfer-encoding: [chunked]
+      vary: [Accept-Encoding]
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN, DENY]
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=D1BFF90BBD292885367C1FAA357B8267]
+      User-Agent: [python-requests/2.21.0]
+    method: GET
+    uri: https://local.algosec.com/BusinessFlow/rest/v1/applications/411/flows
+  response:
+    body:
+      string: !!binary |
+        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
+        pp/gwfbDPwAAAP//AwBlXwe8HBoAAA==
+    headers:
+      cache-control: ['no-cache, no-store, max-age=0, must-revalidate']
+      connection: [close]
+      content-encoding: [gzip]
+      content-type: [application/json;charset=utf-8]
+      date: ['Wed, 23 Jan 2019 21:12:53 GMT']
+      expires: ['0']
+      pragma: [no-cache]
+      server: [Apache-Coyote]
+      strict-transport-security: [max-age=31536000 ; includeSubDomains]
+      transfer-encoding: [chunked]
+      vary: [Accept-Encoding]
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN, DENY]
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=D1BFF90BBD292885367C1FAA357B8267]
+      User-Agent: [python-requests/2.21.0]
+    method: GET
+    uri: https://local.algosec.com/BusinessFlow/rest/v1/network_objects/find?type=EXACT&address=16.47.71.62
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAwIAAAD//7zVW2/TMBQA4L8S+bkqvl/6NhoQSKBWbRFDUxVliTe8enGUpEUV4r/P
+        STNIGgGCBh7ycM6p6vPZ8cnNV1DogymNy96GYEaIRBPgbh90Uv2Is/hRgxl4o20ehLrcBUtXVLEF
+        z7/cHPOm7srK50x+laaFLktdgtkNQHxKxVSgKcdgOwE2LqsPeRpXOvQPmCEiBMeKU6QUn4Ck0D6d
+        ntUwhMQvVph7k/mFXu5Lk/kFXlv3JVg0Lfh1D3ub6SK+NdZUx3XiCv8PEn6bnAsV6QvruBWG82Bj
+        HnUwty7ZBWtdHHQxjpJiSRWFlAklh0pJMBccCiFGUlLFekofw+/K9x+jd1fXEWUj0RCnvnOJpaLn
+        tKbGFZeS47FoRPVkddjCVnHyWdvlfBwXQwQKIhnjbPhiMkH9qSEFYdcV+j4T/acixkTv0p3i1jRf
+        fFpsXuGxSXxAopQpjKGC/swuJiGkRO+Y2kSLijqNviA/w6XN0g1s6fL8GD3sM5P7G7n9CziXkFLp
+        uxjA2xpXSFx+lgjTeox14KdEC7+PGEX/Fyz/NVgp3Ac3iefX17p9GtVDNfrlOO3QV67Ukb/IyS53
+        JquLTSZcXbQNw9k07jYQP9x723BKtNvQ7fO3GxDGd3cuNTZar64vMPuPJhrXvH0CAAD//wMADzPe
+        7i4IAAA=
+    headers:
+      cache-control: ['no-cache, no-store, max-age=0, must-revalidate']
+      connection: [close]
+      content-encoding: [gzip]
+      content-type: [application/json;charset=utf-8]
+      date: ['Wed, 23 Jan 2019 21:12:54 GMT']
+      expires: ['0']
+      pragma: [no-cache]
+      server: [Apache-Coyote]
+      strict-transport-security: [max-age=31536000 ; includeSubDomains]
+      transfer-encoding: [chunked]
+      vary: [Accept-Encoding]
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN, DENY]
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=D1BFF90BBD292885367C1FAA357B8267]
+      User-Agent: [python-requests/2.21.0]
+    method: GET
+    uri: https://local.algosec.com/BusinessFlow/rest/v1/network_objects/find?type=EXACT&address=192.168.0.0%2F16
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAwIAAAD//7SSX2+CMBTFv8rSZ1Fa/gi8ubg5H6YENl+MaSp02smAtIhZln33XdAl
+        ojMhbntrzzlp7/nlzj+Q5KVQIkvHQ+RhmxhuB2XLVx4VR0LK3jjyUMkSEbOCo+/I03te6RNe7DK5
+        ATmGxyKukDdHs0B7ZFKssiTW/AEt1bvCNOYvbJsUkPzRngX4skXAOtMvx43LlokWHSTyQRxLrtR+
+        XOySLradrt7Ve9iuAglTxXNe9R1WnT1sYcfSsW0Y2AUmkeQgx02PWBg7QAf+FCmQGdY8bqY1LfTZ
+        OcFtmFhv4N4LB9wnI7WC7tOHoBdm+VowOIE5ldFaxDTItgWXcF/xlEuW0HDUC+/gPglHVKk1nG6Z
+        XHJZZCm9F5Ln2Q7yV3KyHd00HaLr+JxT7dku7pP2nEzSb67lXjhwGvulqflSlPCFdjSf1hLaPxTH
+        1h8Vt81+s3gtHIrn553bLsqUbWgIlfmqGu+XbQm5ru3iCwAA//8DAJISSXN/BAAA
+    headers:
+      cache-control: ['no-cache, no-store, max-age=0, must-revalidate']
+      connection: [close]
+      content-encoding: [gzip]
+      content-type: [application/json;charset=utf-8]
+      date: ['Wed, 23 Jan 2019 21:12:54 GMT']
+      expires: ['0']
+      pragma: [no-cache]
+      server: [Apache-Coyote]
+      strict-transport-security: [max-age=31536000 ; includeSubDomains]
+      transfer-encoding: [chunked]
+      vary: [Accept-Encoding]
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN, DENY]
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=D1BFF90BBD292885367C1FAA357B8267]
+      User-Agent: [python-requests/2.21.0]
+    method: GET
+    uri: https://local.algosec.com/BusinessFlow/rest/v1/network_objects/find?type=EXACT&address=234.234.234.234
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA2WNsQrCMBRF/+XNQTRt05hN6NDuOpUOsXlIxCYhLwgi/rvPQSh0uMu593LGN2R8
+        evIxDB2Yg5JNIyBe7ziXFQh2QTAgq3q3CvyX51f61X2kwsynk3MZiZDAjJvTJOBhqVySswU7Dlua
+        WstW6Urtj0rAnJGx23S6ZWH2Nx9YNiwpZl7BZ/oCYEqQEsUAAAA=
+    headers:
+      cache-control: ['no-cache, no-store, max-age=0, must-revalidate']
+      connection: [close]
+      content-encoding: [gzip]
+      content-length: ['152']
+      content-type: [application/json;charset=utf-8]
+      date: ['Wed, 23 Jan 2019 21:12:54 GMT']
+      expires: ['0']
+      pragma: [no-cache]
+      server: [Apache-Coyote]
+      strict-transport-security: [max-age=31536000 ; includeSubDomains]
+      vary: [Accept-Encoding]
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN, DENY]
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=D1BFF90BBD292885367C1FAA357B8267]
+      User-Agent: [python-requests/2.21.0]
+    method: GET
+    uri: https://local.algosec.com/BusinessFlow/rest/v1/network_objects/find?type=EXACT&address=192.168.12.12
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAwIAAAD//1WOzQrCMBCEX0X2XEoSa/9ugR705EE9lSI1WUpEk5IEQcR3d1sR7GFZ
+        mG+YmfYFHh8mGGd3DdR8XWQiAXe5oop/gu3vCDXwSqQ8L1NOT8DPd3yOE9y6EEnTFKcwQN2CVM7b
+        szxI6BIwo9TaYwhftowifutDPI26j9jQUfOGMMuyUjCWJ6A8kqyXLK94Mc31ZjCWJjRz92o/z4J3
+        9wHaG35U3gAAAA==
+    headers:
+      cache-control: ['no-cache, no-store, max-age=0, must-revalidate']
+      connection: [close]
+      content-encoding: [gzip]
+      content-type: [application/json;charset=utf-8]
+      date: ['Wed, 23 Jan 2019 21:12:54 GMT']
+      expires: ['0']
+      pragma: [no-cache]
+      server: [Apache-Coyote]
+      strict-transport-security: [max-age=31536000 ; includeSubDomains]
+      transfer-encoding: [chunked]
+      vary: [Accept-Encoding]
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN, DENY]
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+- request:
+    body: !!python/unicode '[{"comment": "Flow created by AlgoSecAnsible", "users":
+      [], "network_applications": [], "sources": [{"name": "192.168.12.12"}, {"name":
+      "HR Payroll server"}, {"name": "192.168.0.0/16"}], "services": [{"name": "HTTPS"},
+      {"name": "http"}, {"name": "tcp/80"}, {"name": "tcp/51"}], "destinations": [{"name":
+      "16.47.71.62"}, {"name": "234.234.234.234"}], "type": "APPLICATION", "custom_fields":
+      [], "name": "new-test-flow-2"}]'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['421']
+      Content-Type: [application/json]
+      Cookie: [JSESSIONID=D1BFF90BBD292885367C1FAA357B8267]
+      User-Agent: [python-requests/2.21.0]
+    method: POST
+    uri: https://local.algosec.com/BusinessFlow/rest/v1/applications/411/flows/new
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAwIAAAD//7RVXW+jOhD9K5GfU2KDMdA3trndRqrSKGQ/pFWFCLiNt8RGxmkUVfvf
+        d0xILyHJbnWl+4CAMzP2nDPj8Y839FSq7WSMrvEQyWzN0TWSfHtleG2urOnKRUOUq/WaSwO2W4AG
+        ueaZ4cVguRvE5bNKeB7LWixLDq42ZrGr7DrxbHY/uYkXk4dpenv/8K1ZSEqeG/EqzC4xmdnU4DdV
+        gy4+EPJJ6XVmhJIQUquNzjn4/XhDmr+KGmCbb+C5bIjU8ifE2X/PY8E7hbv5YJbttCrLQc31K9fo
+        4NrmdqdqA5io4qLQvK6bDRDB2AkCxw0dQjB6HKIyq82XqgC2Y3jQNaEB8xhjIQ4iAnT2QhzbXEY8
+        Cttp8SwkbPVpUwsJWzTSPTRJoF/DYzLEC6jbZdMCLR0SuQ5hkBW83AtUClhurxOKc6VlGiexpdCn
+        eLTUOYo+mDGloYsx61NsbSwigduhOG72vkyOEnxMrgF65LCDR4T12U252Sr9ckzw6yy9m48SVa1E
+        Bl9gfND5ShTpXG1MU+xnLrnOyjT5PEr+gf9p8jmt6xV8fcr0kmujZHorNK/UFvwvy9Qm9RedyH/T
+        6dGSqo2QTa+ftjjohGlPOAschGMODZyAOOwDPTHOnp5UIUCR+fdzfDtr/S9kh+h1U9qaLEVpDz+0
+        KMSG+KRZmOv7R5z3QMvZ9ajTeT52rPtBZwkCt4CFHsPRade/28KgQ3CyrpQGr6aQdsyIc3OK4nfj
+        4bflsjKmQn8QrFM9Ozu4bo70EN2LcpfWouBbIYum22c8z2Q6y0oVl0YBML5JqW2KiRZ1eiPq3IJz
+        VQuTpfmK5y+VEtKk88Df47yDHpCxPVdHo6TDES1uZqMQ/6lXmB8Sry+l5wc0CD1M3Sjol97FjEVH
+        YrVIq5fJq5FP0LkKnOYGjpfKTEKX4cA/W+a9zSMnbelj/7iQLdLJDeT4WG4XdKORR9yQhYyeuVta
+        mxdEfj+3iNn7ppPaHjhchYvFLPlgm30VquQmvYXE4cqyxpmqql36cyNF1XTaYlOKKp0m3+3MzV7S
+        BAYpf7Y5XpysffaUen9pG9c/oU99ij3mUpiA9rTJ/a0QV1Up8gvT89/ixHKHOlFfIKO9uyhO3X49
+        /gYAAP//AwBylhbTFQkAAA==
+    headers:
+      cache-control: ['no-cache, no-store, max-age=0, must-revalidate']
+      connection: [close]
+      content-encoding: [gzip]
+      content-type: [application/json;charset=utf-8]
+      date: ['Wed, 23 Jan 2019 21:12:54 GMT']
+      expires: ['0']
+      pragma: [no-cache]
+      server: [Apache-Coyote]
+      strict-transport-security: [max-age=31536000 ; includeSubDomains]
+      transfer-encoding: [chunked]
+      vary: [Accept-Encoding]
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN, DENY]
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=D1BFF90BBD292885367C1FAA357B8267]
+      User-Agent: [python-requests/2.21.0]
+    method: GET
+    uri: https://local.algosec.com/BusinessFlow/rest/v1/applications/name/Payroll
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6STTW/bMAyG/4qgs1vEQRpnPW1LUCxF5hr9GAYMO7Ay3WiTqECSUxhF/vtoJ3Hc
+        YsUOu9gwyfch+Up+kR63OmhHy4W8nKTjRMJmY7SCeIil4zSRBBblpSyg8c4YmUjlESKWC35wycVk
+        Ns6yD9nkYjpLeuJdhFgHli08VJFFRleoGmWwWEPoeN6VtWo7tUhHhPyx1bHppbkTw7jQVDlv4SAx
+        EOLDpuQh3g4yTXmQbW0IPTxq0yKV81ySjbpOEVRk/o8XyQu1o3yugyYMQdw8s0b2K38B7xtx7TjH
+        QbSgDUfXbfSjcnYD1JzzW+6SHlV4bYFF96jWxE4aMd83PFFzLEWO8dn530MsYfkf0GsgFMv7r0Dw
+        1K1wxP7ixLmOdp94r8Mdsi/lP3tYDGLAlrufbGgdorNXGk25N/VQ3Zs69zq2QD4H1m7B1J23+mnd
+        TfC2vAAf+RQE379Tdf6tuE3P0tFolk3Tv8oeSMch/vbdKrFy6niJ+nJnUdxUlVYoVp++D7UrVnJK
+        HBkDFf8SFimGs7zjgekMMfCI5pUVV5qAFA6pr+dbUkTf6U+xYr5k3O4PAAAA//8DAOrZASClAwAA
+    headers:
+      cache-control: ['no-cache, no-store, max-age=0, must-revalidate']
+      connection: [close]
+      content-encoding: [gzip]
+      content-type: [application/json;charset=utf-8]
+      date: ['Wed, 23 Jan 2019 21:12:54 GMT']
+      expires: ['0']
+      pragma: [no-cache]
+      server: [Apache-Coyote]
+      strict-transport-security: [max-age=31536000 ; includeSubDomains]
+      transfer-encoding: [chunked]
+      vary: [Accept-Encoding]
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN, DENY]
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['0']
+      Cookie: [JSESSIONID=8168E1AED84E6E70F03381C669C461D6]
+      User-Agent: [python-requests/2.21.0]
+    method: POST
+    uri: https://local.algosec.com/BusinessFlow/rest/v1/applications/412/apply
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAwIAAAD//6STTW/aQBCG/8pqz06Ek/ARTqWkKESUWCSpKlU9DOsBT7repbtrEIr4
+        7xkbMKZq1EMvxszH886+O36TKgOzxBn+LtAH2X+TlMp++7rTjqTbB62TfTnQS/uESgzSnAz54KCM
+        R9IHCIXngsfky7T8X8xfUTFIfi48GfR+pO1GDCsVcZARC+tEAltntRabjFQmyAvw3iqCgKnYUMjE
+        /UzuIgmrlSYFgawpp3O4Js/v4zvZv2ldn+XLWHwVR9JAjjzBQYGnUg5L7h0/uKR907vqtru33U47
+        jmri0/EkCZqUzFKM85XGHE3Yi0dS0wLVVmlMMvCVgLNpoQ5ZZY3hk9OawrZmTa1oxgUZPnpeA8GH
+        l1XKU51N1mv14u5tJNeFNuhgTrpEKuu4pNuqlAKowPwfbIjV2HBbPG64R9Ye3INzW/FgOcdBzIE0
+        R7My+knZfAVme8m/7HSNShzlwE3PqDLD1mox3AueqFO+oymGjXW/mliD6X9AH8CgGD9/BQPL6ghH
+        7CsnLink+8RHCryd1qT/1MjRiwZb7n6yoQVveT4i1One1EN1berQUSiBfA/cuwZdVN7SMqsm+LM8
+        ARf4FgQv5Kl6+i2ZxRdxq9XrduK/tr0YCk387MMqMbHquER1uc1RPC4WpFBMBt+bvRPu5JQ4Mhpd
+        /I2UK+4vphUPdGWIhjnqMytGZMAobFLP5xubgK7qP8WS4Zhxu907AAAA//8DABuda3BmBAAA
+    headers:
+      cache-control: ['no-cache, no-store, max-age=0, must-revalidate']
+      connection: [close]
+      content-encoding: [gzip]
+      content-type: [application/json;charset=utf-8]
+      date: ['Wed, 23 Jan 2019 20:36:51 GMT']
+      expires: ['0']
+      pragma: [no-cache]
+      server: [Apache-Coyote]
+      strict-transport-security: [max-age=31536000 ; includeSubDomains]
+      transfer-encoding: [chunked]
+      vary: [Accept-Encoding]
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN, DENY]
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

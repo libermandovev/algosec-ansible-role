@@ -6,7 +6,7 @@ from ansible.module_utils.basic import AnsibleModule
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 try:
-    from algosec.api_client import BusinessFlowAPIClient
+    from algosec.api_clients.business_flow import BusinessFlowAPIClient
     from algosec.errors import AlgoSecAPIError, EmptyFlowSearch
     from algosec.models import RequestedFlow
     from algosec.flow_comparison_logic import IsEqualToFlowComparisonLogic
@@ -92,11 +92,12 @@ def main():
                 try:
                     latest_revision_id = api.get_application_revision_id_by_name(app_name)
                     api.apply_application_draft(latest_revision_id)
-                except AlgoSecAPIError, e:
+                except AlgoSecAPIError as e:
                     module.fail_json(
                         msg="Exception while trying to apply application draft. "
                             "It is possible that another draft was just applied. "
-                            "You can run the module with apply_draft=False.\nResponse Json: {}".format(e.response_json)
+                            "You can run the module with apply_draft=False."
+                            "\nResponse Json: {}".format(e.response_content)
                     )
             changed = True
             message = "Flow created/updated successfully!"
