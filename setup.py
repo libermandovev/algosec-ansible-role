@@ -28,7 +28,7 @@ setup(
         "Programming Language :: Python :: 3.6",
     ],
     install_requires=[
-        "algosec>=1.3.0",
+        "algosec>=1.3.1",
         "ansible",
         "marshmallow",
         "urllib3",

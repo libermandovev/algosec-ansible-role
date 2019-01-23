@@ -1,10 +1,17 @@
 AlgoSec Ansible Role
 ====================
 
-.. image:: https://readthedocs.org/projects/algosec-ansible-role/badge/
+|docs| |travis| |coverage|
+
+.. |docs| image:: https://readthedocs.org/projects/algosec-ansible-role/badge/
    :target: http://algosec-ansible-role.readthedocs.io/en/latest/
    :alt: Documentation Status
 
+.. |coverage| image:: https://img.shields.io/codecov/c/github/algosec/algosec-ansible-role.svg
+    :target: https://codecov.io/gh/algosec/algosec-ansible-role
+
+.. |travis| image:: https://travis-ci.com/algosec/algosec-ansible-role.svg?branch=master
+    :target: https://travis-ci.com/algosec/algosec-ansible-role
 
 Ansible role to DevOps-ify network security management, leveraging AlgoSec's business-driven security policy management solution
 
@@ -13,10 +20,12 @@ Documentation available online at: http://algosec-ansible-role.readthedocs.io/en
 Requirements
 ------------
 
-All modules of this role require ``python2.7`` environment::
+* This module is supported and fully tested under ``python2.7`` and ``python3.6``.
 
-    pip install algosec==0.9.* --upgrade
-    pip install ansible marshmallow
+* All modules of this role require environment::
+
+    pip install algosec --upgrade
+    pip install ansible marshmallow urllib3
 
 Installation
 ------------
