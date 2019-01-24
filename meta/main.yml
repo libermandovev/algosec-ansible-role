@@ -1,6 +1,8 @@
 galaxy_info:
   author: Almog Cohen
-  description: AlgoSec Ansible role provide a set of Ansible modules to help you manage and orchestrate your work with the different AlgoSec services.
+  description: >
+    DevOps-ify network security management, leveraging AlgoSec's
+    business-driven security policy management solution.
   company: AlgoSec
   license: MIT
 
