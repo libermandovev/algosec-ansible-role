@@ -1,6 +1,8 @@
 AlgoSec Ansible Role
 ====================
 
+DEPRECATED
+
 |docs| |travis| |coverage|
 
 .. |docs| image:: https://readthedocs.org/projects/algosec-ansible-role/badge/
